@@ -2,26 +2,23 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Welcome to Glitch!</title>
+    <title></title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="A cool thing made with Glitch">
-    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
-
-    <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" href="/style.css">
   </head>
   <body>
+    Potato
+    <div id="connection"></div>
     <script>
       const ws = new WebSocket( 'wss://' + window.location.hostname );
 
       ws.addEventListener('open', function () {
-        console.log('connected');
-        ws.send(Date.now());
+        connection.textContent = 'connected';
+        ws.send( Date.now() );
       });
 
       ws.addEventListener('close', function () {
-        console.log('disconnected');
+        connection.textContent = 'disconnected';
       });
 
       ws.addEventListener('message', function ( data ) {
