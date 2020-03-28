@@ -1,5 +1,3 @@
-<!-- This is a static file -->
-<!-- served from your routes in server.js -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,40 +10,31 @@
 
     <!-- import the webpage's stylesheet -->
     <link rel="stylesheet" href="/style.css">
-
-    <!-- import the webpage's client-side javascript file -->
-    <script src="/script.js" defer></script>
   </head>
   <body>
-    <header>
-      <h1>A Dream of the Future</h1>
-    </header>
+    <script>
+      const ws = new WebSocket( 'wss://' + window.location.hostname );
 
-    <main>
-      <h2>Oh hi,</h2>
+      ws.addEventListener('open', function () {
+        console.log('connected');
+        ws.send(Date.now());
+      });
 
-      <p>Tell me your hopes and dreams:</p>
+      ws.addEventListener('close', function () {
+        console.log('disconnected');
+      });
 
-      <form>
-        <label>
-          New Dream
-          <input name="dream" type="text" maxlength="100" required placeholder="Dreams!">
-        </label>
-        <button type="submit" id="submit-dream">Add Dream</button>
-      </form>
+      ws.addEventListener('message', function ( data ) {
 
-      <section class="dreams">
-        <ul id="dreams">
-          <em>loading dreams&hellip;</em>
-        </ul>
-      </section>
-    </main>
+        console.log(`Roundtrip time: ${Date.now() - data} ms`);
 
-    <footer>Made with <a href="https://glitch.com">Glitch</a>!</footer>
+        setTimeout( function () {
 
-    <!-- include the Glitch button to show what the webpage is about and
-          to make it easier for folks to view source and remix -->
-    <div class="glitchButton" style="position:fixed;top:2em;right:20px;"></div>
-    <script src="https://button.glitch.me/button.js"></script>
+          ws.send( Date.now() );
+
+        }, 500);
+
+      } );
+    </script>
   </body>
 </html>
