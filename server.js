@@ -1,9 +1,10 @@
-const WebSocket = require('ws');
-
+?
+const WebSocket = require( 'ws' );
 const wss = new WebSocket.Server( { port: 8080 } );
-wss.on('connection', function connection(ws) {
 
-  ws.on('message', function ( message ) {
+wss.on( 'connection', function ( ws ) {
+
+  ws.on( 'message', function ( message ) {
 
     console.log('received: %s', message );
 
@@ -13,6 +14,22 @@ wss.on('connection', function connection(ws) {
 
 } );
 
+//
+
+const fs = require( 'fs' );
+const http = require('http');
+
+const server = http.createServer();
+http.createServer( function ( request, response ) {
+
+  response.write( 'Hello World!' ); 
+  response.end();
+
+} );
+server.listen( 3000 );
+
+
+/*
 // server.js
 // where your node app starts
 
@@ -47,3 +64,4 @@ app.get("/dreams", (request, response) => {
 const listener = app.listen(process.env.PORT, () => {
   console.log("Your app is listening on port " + listener.address().port);
 });
+*/
