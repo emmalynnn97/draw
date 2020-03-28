@@ -1,4 +1,7 @@
-?
+var express = require( 'express' );
+var expressWs = require( 'express-ws' );
+
+/*
 const WebSocket = require( 'ws' );
 const wss = new WebSocket.Server( { port: 8080 } );
 
@@ -16,17 +19,19 @@ wss.on( 'connection', function ( ws ) {
 
 //
 
-const fs = require( 'fs' );
+// const fs = require( 'fs' );
 const http = require('http');
 
-const server = http.createServer();
-http.createServer( function ( request, response ) {
+function handleRequest( request, response ) {
 
+  response.writeHead( 200, { 'Content-Type': 'text/html' } );
   response.write( 'Hello World!' ); 
   response.end();
 
-} );
-server.listen( 3000 );
+}
+
+const server = http.createServer( handleRequest ).listen( process.env.PORT );
+*/
 
 
 /*
