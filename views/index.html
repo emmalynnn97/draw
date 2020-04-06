@@ -11,6 +11,7 @@
     <div id="connection"></div>
     <script>
       const ws = new WebSocket( 'wss://' + window.location.hostname );
+      ws.binaryType = 'arraybuffer';
 
       ws.addEventListener('open', function () {
         connection.textContent = 'connected';
