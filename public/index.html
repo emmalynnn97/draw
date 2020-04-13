@@ -23,7 +23,8 @@
     <div id="log"></div>
     <script type="module">
       
-      import { Client } from './js/Client.js';
+      import { Player } from './js/Player.js';
+      import { Recorder } from './js/Recorder.js';
       
       // Canvas
       
@@ -76,21 +77,22 @@
 
       } );
       
-      const client = new Client();
+      const recorder = new Recorder( );
       
       document.addEventListener( 'mousemove', function ( event ) {
 
         const x = parseInt( event.pageX * window.devicePixelRatio );
         const y = parseInt( event.pageY * window.devicePixelRatio );
-        client.moveTo( x, y );
+        recorder.moveTo( x, y );
         
         context.fillStyle = 'red';
         context.fillRect( x - 1, y - 1, 2, 2 );
         
-        if ( client.isFull() ) {
+        if ( recorder.isFull() ) {
 
-          ws.send( client.buffer() );
-          client.reset();
+          ws.send( recorder.buffer() );
+
+          recorder.reset();
 
         } 
 
