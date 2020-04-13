@@ -8,23 +8,24 @@
   </head>
   <body>
     Potato
-    <div id="connection"></div>
+    <div id="log"></div>
     <script>
       const ws = new WebSocket( 'wss://' + window.location.hostname );
       ws.binaryType = 'arraybuffer';
 
       ws.addEventListener('open', function () {
-        connection.textContent = 'connected';
+        log.innerHTML += 'connected<br/>';
         ws.send( Date.now() );
       });
 
       ws.addEventListener('close', function () {
-        connection.textContent = 'disconnected';
+        log.innerHTML += 'disconnected<br/>';
       });
 
       ws.addEventListener('message', function ( data ) {
 
-        console.log(`Roundtrip time: ${Date.now() - data} ms`);
+        console.log( data );
+        log.innerHTML += data;
 
         setTimeout( function () {
 
@@ -33,6 +34,14 @@
         }, 500);
 
       } );
+      
+      document.addEventListener( 'mousemove', function ( event ) {
+
+        var data = new Int8Array( [ event.pageX, event.pageY ] );
+        ws.send( data );
+
+      } ); 
+      
     </script>
   </body>
 </html>

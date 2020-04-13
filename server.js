@@ -10,7 +10,7 @@ app.get( '/', function ( request, response ) {
 
 app.ws( '/', function ( ws, request ) {
   ws.on( 'message', function( message ) {
-    console.log( message );
+    ws.broadcast( message );
   } );
   console.log( 'socket' );
 } );
