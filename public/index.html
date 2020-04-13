@@ -64,9 +64,9 @@
         
         context.moveTo( cx, cy );
         
-        for ( var i = ; i < array.length; i += 2 ) {
-          cx += data.getInt8( [ i + 0 ];
-          cy += array[ i + 1 ];
+        for ( var i = 0; i <= 60; i += 2 ) {
+          cx += data.getInt8( 4 + i + 0 );
+          cy += data.getInt8( 4 + i + 1 );
           context.lineTo( cx, cy );
 
         }
