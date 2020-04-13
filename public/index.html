@@ -56,21 +56,30 @@
       ws.addEventListener( 'message', function ( event ) {
 
         var array = new Uint8Array( event.data );
+        
+        
         context.lineTo( array[ 0 ], array[ 1 ] );
         context.stroke();
 
       } );
       
-      const input = new Int8Array( 2 );
+      const client = new Client();
       
       document.addEventListener( 'mousemove', function ( event ) {
 
-        input[ 0 ] = parseInt( event.pageX * window.devicePixelRatio );
-        input[ 1 ] = parseInt( event.pageY * window.devicePixelRatio );
+        const x = parseInt( event.pageX * window.devicePixelRatio );
+        const y = parseInt( event.pageY * window.devicePixelRatio );
+        client.moveTo( x, y );
 
-        ws.send( input.buffer );
+      } );
+      
+      setInterval( function () {
+        
+        ws.send( client.buffer() );
 
-      } ); 
+        client.reset();
+        
+      }, 1000 );
       
     </script>
   </body>
