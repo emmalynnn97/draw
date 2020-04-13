@@ -55,17 +55,17 @@
 
       ws.addEventListener( 'message', function ( event ) {
 
-        let array = new Int8Array( event.data );
+        let data = new DataView( event.data );
         
         context.beginPath();
         
-        let cx = array[ 0 ];
-        let cy = array[ 1 ];
+        let cx = data.getUint16( 0 );
+        let cy = data.getUint16( 2 );
         
         context.moveTo( cx, cy );
         
-        for ( var i = 2; i < array.length; i += 2 ) {
-          cx += array[ i + 0 ];
+        for ( var i = ; i < array.length; i += 2 ) {
+          cx += data.getInt8( [ i + 0 ];
           cy += array[ i + 1 ];
           context.lineTo( cx, cy );
 

@@ -3,8 +3,10 @@ function Client() {
   let cx = 0;
   let cy = 0;
 
-  let index = 0;
-  let buffer = new ArrayBuffer( 30 * 2 );
+  let byteOffset = 0;
+  let byteTotal = ( 2 * 4 ) + ( 60 );
+  let buffer = new ArrayBuffer( byteTotal );
+  
   let data = new DataView( buffer );
 
   return {
@@ -12,20 +14,23 @@ function Client() {
       return buffer;
     },
     isFull: function () {
-      return index === 30 * 2;
+      return byteOffset === byteTotal;
     },
     moveTo: function ( x, y ) {
-      if ( index === 0 ) {
-        data.
+      if ( byteOffset === 0 ) {
+        data.setUint16( byteOffset, x );
+        data.setUint16( byteOffset + 2, y );
+        byteOffset += 4;
+      } else {
+        data.setUint8( byteOffset, x - cx );
+        data.setUint8( byteOffset + 1, y - cy );
+        byteOffset += 2;
       }
-      data[ index + 0 ] = x - cx;
-      data[ index + 1 ] = y - cy;
       cx = x;
       cy = y;
-      index += 2;
     },
     reset: function () {
-      index = 0;
+      byteOffset = 0;
       data.fill( 0 );
     }
   };
