@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Multiuser Sketchpad</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
@@ -32,16 +32,17 @@
       const canvas = document.createElement( 'canvas' );
       canvas.width = window.innerWidth * window.devicePixelRatio;
       canvas.height = window.innerHeight * window.devicePixelRatio;
-      canvas.style.width = window.innerWidth + 'px';
-      canvas.style.height = window.innerHeight + 'px';
       document.body.appendChild( canvas );
       
       const context = canvas.getContext( '2d' );
-      
-      // WebSockets
+
+      //
       
       const player = new Player( context );
+      const recorder = new Recorder( context );
       
+      // WebSockets
+            
       const ws = new WebSocket( 'wss://' + window.location.hostname );
       ws.binaryType = 'arraybuffer';
 
@@ -72,9 +73,7 @@
 
       requestAnimationFrame( animate );
       
-      //
-
-      const recorder = new Recorder( context );
+      // Recorder
       
       document.addEventListener( 'mousemove', function ( event ) {
 
