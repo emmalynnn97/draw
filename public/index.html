@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+      html {
+        touch-action: none;
+      }
       body {
         margin: 0;
       }
@@ -75,7 +78,7 @@
       
       // Recorder
       
-      document.addEventListener( 'mousemove', function ( event ) {
+      document.addEventListener( 'pointermove', function ( event ) {
 
         const x = parseInt( event.pageX * window.devicePixelRatio );
         const y = parseInt( event.pageY * window.devicePixelRatio );
