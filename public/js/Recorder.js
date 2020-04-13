@@ -1,4 +1,4 @@
-function Recorder() {
+function Recorder( context ) {
 
   let cx = 0;
   let cy = 0;
@@ -10,13 +10,15 @@ function Recorder() {
   let data = new DataView( buffer );
 
   return {
-    buffer: function () {
+    getBuffer: function () {
       return buffer;
     },
     isFull: function () {
       return byteOffset === byteTotal;
     },
-    moveTo: function ( x, y ) {
+    moveTo: function ( x, y ) {        
+      context.fillStyle = 'red';
+      context.fillRect( x - 1, y - 1, 2, 2 );
       if ( byteOffset === 0 ) {
         data.setUint16( byteOffset + 0, x );
         data.setUint16( byteOffset + 2, y );

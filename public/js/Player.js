@@ -1,37 +1,44 @@
-function Player() {
-
+function Player( context ) {
+  
   let cx = 0;
   let cy = 0;
-
-  let byteOffset = 0;
-  let byteTotal = ( 2 * 4 ) + ( 30 * 2 );
-  let buffer = new ArrayBuffer( byteTotal );
   
-  let data = new DataView( buffer );
+  let byteOffset = 0;
+  let data;
 
   return {
-    buffer: function () {
-      return buffer;
+    setBuffer: function ( buffer ) {
+      data = new DataView( buffer );
+
+      context.beginPath();
+
+      let cx = data.getUint16( 0 );
+      let cy = data.getUint16( 2 );
+
+      context.moveTo( cx, cy );
+
+      for ( var i = 0; i <= 60; i += 2 ) {
+        context.lineTo( cx, cy );
+
+      }
+
+      context.strokeStyle = 'blue';
+      context.stroke();
+      
     },
-    isFull: function () {
-      return byteOffset === byteTotal;
-    },
-    moveTo: function ( x, y ) {
+    next: function () {
+      
       if ( byteOffset === 0 ) {
-        data.setUint16( byteOffset + 0, x );
-        data.setUint16( byteOffset + 2, y );
+        cx = data.getUint16( 0 );
+        cy = data.getUint16( 2 );
         byteOffset += 4;
       } else {
-        data.setUint8( byteOffset + 0, x - cx );
-        data.setUint8( byteOffset + 1, y - cy );
-        byteOffset += 2;
+        cx += data.getInt8( 4 + i + 0 );
+        cy += data.getInt8( 4 + i + 1 );        
       }
-      cx = x;
-      cy = y;
-    },
-    reset: function () {
-      byteOffset = 0;
+      
     }
+    
   };
   
 }
