@@ -39,6 +39,8 @@
       
       // WebSockets
       
+      const player = new Player( context );
+      
       const ws = new WebSocket( 'wss://' + window.location.hostname );
       ws.binaryType = 'arraybuffer';
 
@@ -60,7 +62,17 @@
 
       } );
       
-      const player = new Player( context );
+      function animate() {
+
+        player.next();
+        requestAnimationFrame( animate );
+
+      }
+
+      requestAnimationFrame( animate );
+      
+      //
+
       const recorder = new Recorder( context );
       
       document.addEventListener( 'mousemove', function ( event ) {
