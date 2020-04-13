@@ -7,9 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    Potato
     <div id="log"></div>
     <script>
+      
+      // Canvas
       
       const canvas = document.createElement( 'canvas' );
       canvas.width = window.innerWidth * window.devicePixelRatio;
@@ -25,16 +26,19 @@
       const ws = new WebSocket( 'wss://' + window.location.hostname );
       ws.binaryType = 'arraybuffer';
 
-      ws.addEventListener('open', function () {
-        log.innerHTML += 'connected<br/>';
-        ws.send( Date.now() );
-      });
+      ws.addEventListener( 'open', function ( event ) {
 
-      ws.addEventListener('close', function () {
-        log.innerHTML += 'disconnected<br/>';
-      });
+        log.textContent = 'connected';
 
-      ws.addEventListener('message', function ( event ) {
+      } );
+
+      ws.addEventListener( 'close', function ( event ) {
+
+        log.textContent = 'disconnected';
+
+      } );
+
+      ws.addEventListener( 'message', function ( event ) {
 
         var array = new Uint8Array( event.data );
         context.lineTo( array[ 0 ], array[ 1 ] );
