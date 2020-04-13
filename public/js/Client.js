@@ -1,23 +1,32 @@
 function Client() {
 
-  var index = 0;
-  var data = new Uint8Array( 30 * 2 );
+  let cx = 0;
+  let cy = 0;
 
-  var cx = 0;
-  var cy = 0;
-  
+  let index = 0;
+  let buffer = new ArrayBuffer( 30 * 2 );
+  let data = new DataView( buffer );
+
   return {
     buffer: function () {
-      return data.buffer;
+      return buffer;
+    },
+    isFull: function () {
+      return index === 30 * 2;
     },
     moveTo: function ( x, y ) {
-      data[ index ++ ] = x - cx;
-      data[ index ++ ] = y - cy;
+      if ( index === 0 ) {
+        data.
+      }
+      data[ index + 0 ] = x - cx;
+      data[ index + 1 ] = y - cy;
       cx = x;
       cy = y;
+      index += 2;
     },
     reset: function () {
       index = 0;
+      data.fill( 0 );
     }
   };
   

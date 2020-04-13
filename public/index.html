@@ -55,7 +55,7 @@
 
       ws.addEventListener( 'message', function ( event ) {
 
-        let array = new Uint8Array( event.data );
+        let array = new Int8Array( event.data );
         
         context.beginPath();
         
@@ -63,7 +63,7 @@
         let cy = array[ 1 ];
         
         context.moveTo( cx, cy );
-
+        
         for ( var i = 2; i < array.length; i += 2 ) {
           cx += array[ i + 0 ];
           cy += array[ i + 1 ];
@@ -82,16 +82,15 @@
         const x = parseInt( event.pageX * window.devicePixelRatio );
         const y = parseInt( event.pageY * window.devicePixelRatio );
         client.moveTo( x, y );
+        
+        if ( client.isFull() ) {
+
+          ws.send( client.buffer() );
+          client.reset();
+
+        } 
 
       } );
-      
-      setInterval( function () {
-        
-        ws.send( client.buffer() );
-
-        client.reset();
-        
-      }, 500 );
       
     </script>
   </body>
