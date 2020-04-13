@@ -1,7 +1,7 @@
 function Player( context ) {
   
-  let cx = 0;
-  let cy = 0;
+  let cx;
+  let cy;
   
   let byteTotal = ( 2 * 4 ) + ( 30 * 2 );
   let byteOffset = byteTotal;
@@ -26,11 +26,12 @@ function Player( context ) {
       
       if ( byteOffset === byteTotal ) return;
 
-      let mx = 90, my;
+      let mx;
+      let my;
 
       if ( byteOffset === 0 ) {
         
-        if ( cx > 0 ) {
+        if ( cx ) {
           
           mx = cx;
           my = cy;
@@ -46,8 +47,6 @@ function Player( context ) {
           this.draw( mx, my, cx, cy );          
           
         }
-        
-        isLine = true;
 
       }
       
