@@ -55,10 +55,22 @@
 
       ws.addEventListener( 'message', function ( event ) {
 
-        var array = new Uint8Array( event.data );
+        let array = new Uint8Array( event.data );
         
+        context.beginPath();
         
-        context.lineTo( array[ 0 ], array[ 1 ] );
+        let cx = array[ 0 ];
+        let cy = array[ 1 ];
+        
+        context.moveTo( cx, cy );
+
+        for ( var i = 2; i < array.length; i += 2 ) {
+          cx += array[ i + 0 ];
+          cy += array[ i + 1 ];
+          context.lineTo( cx, cy );
+
+        }
+        
         context.stroke();
 
       } );
@@ -79,7 +91,7 @@
 
         client.reset();
         
-      }, 1000 );
+      }, 500 );
       
     </script>
   </body>
