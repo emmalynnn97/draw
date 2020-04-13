@@ -14,7 +14,7 @@ function Client() {
       return buffer;
     },
     isFull: function () {
-      return byteOffset === byteTotal;
+      return byteOffset >= byteTotal;
     },
     moveTo: function ( x, y ) {
       if ( byteOffset === 0 ) {
