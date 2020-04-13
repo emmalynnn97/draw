@@ -10,6 +10,18 @@
     Potato
     <div id="log"></div>
     <script>
+      
+      const canvas = document.createElement( 'canvas' );
+      canvas.width = window.innerWidth * window.devicePixelRatio;
+      canvas.height = window.innerHeight * window.devicePixelRatio;
+      canvas.style.width = window.innerWidth + 'px';
+      canvas.style.height = window.innerHeight + 'px';
+      document.body.appendChild( canvas );
+      
+      const context = canvas.getContext( '2d' );
+      
+      // WebSockets
+      
       const ws = new WebSocket( 'wss://' + window.location.hostname );
       ws.binaryType = 'arraybuffer';
 
@@ -22,18 +34,22 @@
         log.innerHTML += 'disconnected<br/>';
       });
 
-      ws.addEventListener('message', function ( message ) {
+      ws.addEventListener('message', function ( event ) {
 
-        console.log(message.data);
-        // log.innerHTML += message.data;
+        var array = new Uint8Array( event.data );
+        context.lineTo( array[ 0 ], array[ 1 ] );
+        context.stroke();
 
       } );
       
+      const input = new Int8Array( 2 );
+      
       document.addEventListener( 'mousemove', function ( event ) {
 
-        var data = new Int8Array( [ event.pageX, event.pageY ] );
-        // console.log( data )
-        ws.send( data.buffer );
+        input[ 0 ] = parseInt( event.pageX * window.devicePixelRatio );
+        input[ 1 ] = parseInt( event.pageY * window.devicePixelRatio );
+
+        ws.send( input.buffer );
 
       } ); 
       

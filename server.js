@@ -10,9 +10,9 @@ app.get( '/', function ( request, response ) {
 } );
 
 app.ws( '/', function ( ws, request ) {
-  ws.on( 'message', function( message ) {
+  ws.on( 'message', function( data ) {
     aWss.clients.forEach(function ( client ) {
-      client.send( message.data );
+      client.send( data );
     });
   } );
   console.log( 'socket' );
