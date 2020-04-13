@@ -5,10 +5,25 @@
     <title></title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body {
+        margin: 0;
+      }
+      canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      #log {
+        position: absolute;
+      }
+    </style>
   </head>
   <body>
     <div id="log"></div>
-    <script>
+    <script type="module">
+      
+      import { Client } from './js/Client.js';
       
       // Canvas
       
