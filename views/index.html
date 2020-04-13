@@ -22,23 +22,18 @@
         log.innerHTML += 'disconnected<br/>';
       });
 
-      ws.addEventListener('message', function ( data ) {
+      ws.addEventListener('message', function ( message ) {
 
-        console.log( data );
-        log.innerHTML += data;
-
-        setTimeout( function () {
-
-          ws.send( Date.now() );
-
-        }, 500);
+        console.log(message.data);
+        // log.innerHTML += message.data;
 
       } );
       
       document.addEventListener( 'mousemove', function ( event ) {
 
         var data = new Int8Array( [ event.pageX, event.pageY ] );
-        ws.send( data );
+        // console.log( data )
+        ws.send( data.buffer );
 
       } ); 
       

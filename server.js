@@ -2,6 +2,7 @@ const express = require( 'express' );
 const app = express();
 
 const expressWs = require( 'express-ws' )( app );
+const aWss = expressWs.getWss('/');
 
 app.use( express.static( 'public' ) );
 app.get( '/', function ( request, response ) {
@@ -10,7 +11,9 @@ app.get( '/', function ( request, response ) {
 
 app.ws( '/', function ( ws, request ) {
   ws.on( 'message', function( message ) {
-    ws.broadcast( message );
+    aWss.clients.forEach(function ( client ) {
+      client.send( message.data );
+    });
   } );
   console.log( 'socket' );
 } );
