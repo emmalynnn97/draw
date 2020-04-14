@@ -6,11 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-      /*
       html {
         touch-action: none;
       }
-      */
       body {
         margin: 0;
       }
@@ -27,7 +25,7 @@
       }
     </style>
   </head>
-  <body ontouchstart="">
+  <body>
     <div id="status"></div>
     <script type="module">
       
@@ -83,8 +81,17 @@
       // Recorder
       
       let prevTime = 0;
+
+      document.addEventListener( 'pointerdown', function ( event ) {
+        
+        event.preventDefault();
+              
+      } );
+
       
       document.addEventListener( 'pointermove', function ( event ) {
+        
+        event.preventDefault();
 
         // Throttle to 60Hz
         
