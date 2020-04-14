@@ -18,13 +18,14 @@
         height: 100%;
         cursor: crosshair;
       }
-      #log {
+      #status {
         position: absolute;
+        text-align: center;
       }
     </style>
   </head>
   <body>
-    <div id="log"></div>
+    <div id="status"></div>
     <script type="module">
       
       import { Player } from './js/Player.js';
@@ -51,13 +52,13 @@
 
       ws.addEventListener( 'open', function ( event ) {
 
-        log.textContent = 'connected';
+        document.getElementById( 'status' ).textContent = 'connected';
 
       } );
 
       ws.addEventListener( 'close', function ( event ) {
 
-        log.textContent = 'disconnected';
+        document.getElementById( 'status' ).textContent = 'disconnected';
 
       } );
 
@@ -78,7 +79,20 @@
       
       // Recorder
       
+      let prevTime = 0;
+      
       document.addEventListener( 'pointermove', function ( event ) {
+
+        // Throttle to 60Hz
+        
+        const throttle = ( 1 / 60 ) * 100;
+        const time = event.timeStamp;
+        
+        if ( time < ( prevTime + throttle ) ) return;
+        
+        prevTime = time;
+        
+        //
 
         const x = parseInt( event.pageX * window.devicePixelRatio );
         const y = parseInt( event.pageY * window.devicePixelRatio );
