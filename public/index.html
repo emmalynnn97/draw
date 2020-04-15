@@ -55,13 +55,19 @@
       ws.addEventListener( 'open', function ( event ) {
 
         recorder = new Recorder( context );
-        document.getElementById( 'status' ).textContent = 'connected';
+
+        canvas.addEventListener( 'pointermove', onPointerMove );
+
+        document.getElementById( 'status' ).textContent = 'connected';    
 
       } );
 
       ws.addEventListener( 'close', function ( event ) {
 
         recorder = null;
+
+        canvas.removeEventListener( 'pointermove', onPointerMove );
+        
         document.getElementById( 'status' ).textContent = 'disconnected';
 
       } );
@@ -73,17 +79,16 @@
       } );
       
       // Recorder
-      
-      let prevTime = 0;
 
       canvas.addEventListener( 'touchstart', function ( event ) {
         
         event.preventDefault();
               
       } );
-
       
-      canvas.addEventListener( 'pointermove', function ( event ) {
+      let ptime = 0;
+      
+      function onPointerMove( event ) {
         
         event.preventDefault();
 
@@ -94,9 +99,9 @@
           const throttle = ( 1 / 60 ) * 100;
           const time = event.timeStamp;
 
-          if ( time < ( prevTime + throttle ) ) return;
+          if ( time < ( ptime + throttle ) ) return;
 
-          prevTime = time;
+          ptime = time;
 
           //
 
@@ -107,7 +112,7 @@
           
         }
 
-      } );
+      }
       
     </script>
   </body>
