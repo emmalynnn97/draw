@@ -7,11 +7,19 @@ const aWss = expressWs.getWss('/');
 app.use( express.static( 'public' ) );
 
 app.ws( '/', function ( ws, request ) {
-  ws.on( 'message', function( data ) {
-    aWss.clients.forEach(function ( client ) {
+  
+  console.log( ws );
+  
+  ws.on( 'message', function ( data ) {
+    
+    aWss.clients.forEach( function ( client ) {
+      
       client.send( data );
-    });
+
+    } );
+
   } );
+
 } );
 
 const listener = app.listen( process.env.PORT, function () {

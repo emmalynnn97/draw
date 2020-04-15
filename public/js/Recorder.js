@@ -3,7 +3,7 @@ function Recorder( context ) {
   const commands = [
     new Uint8Array( [ 0, 0 ] ),
     new Uint8Array( [ 0, 1 ] ),
-    new Uint8Array( [ 0, 2 ] ),
+    new DataView( new ArrayBuffer( 1 + 1 + 2 + 2 ) ),
     new Uint8Array( [ 0, 3 ] ),
     new DataView( new ArrayBuffer( 1 + 1 + 2 + 2 ) ),
     new DataView( new ArrayBuffer( 1 + 1 + 1 + 1 ) )
@@ -45,10 +45,15 @@ function Recorder( context ) {
       return command.buffer;
     },
     down: function ( x, y ) {
-      return commands[ 2 ];      
+      let command = commands[ 2 ];
+      command.setUint8( 1, 2 );
+      command.setUint16( 2, x );
+      command.setUint16( 4, y );    
+      return command.buffer;      
     },
     up: function () {
-      return commands[ 3 ];
+      let command = commands[ 3 ];
+      return command.buffer;
     }
   };
   

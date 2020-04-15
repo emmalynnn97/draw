@@ -121,7 +121,10 @@
       
       function onPointerDown( even ) {
 
-        ws.send( recorder.down() );
+        const x = parseInt( event.pageX * window.devicePixelRatio );
+        const y = parseInt( event.pageY * window.devicePixelRatio );
+
+        ws.send( recorder.down( x, y ) );
         
       }
       
