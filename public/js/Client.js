@@ -59,7 +59,7 @@ function Client( context, dom ) {
       
       switch ( data.getUint8( 1 ) ) {
 
-        case 2:
+        case 0:
           this.down(
             data.getUint16( 2 ),
             data.getUint16( 4 ),
@@ -67,18 +67,18 @@ function Client( context, dom ) {
           );
           break;
           
-        case 3:
+        case 1:
           this.up();
           break;
           
-        case 4:
+        case 2:
           this.move(
             data.getUint16( 2 ),
             data.getUint16( 4 )
           );
           break;
 
-        case 5:
+        case 3:
           if ( cx !== null ) {
             this.move(
               cx + data.getInt8( 2 ),

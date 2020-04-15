@@ -41,6 +41,8 @@ function emptySpot( ws ) {
   
 }
 
+//
+
 app.ws( '/', function ( ws, request ) {
   
   ws._id = findSpot( ws );
@@ -80,6 +82,8 @@ app.ws( '/', function ( ws, request ) {
   } );
 
 } );
+
+//
 
 const listener = app.listen( process.env.PORT, function () {
 

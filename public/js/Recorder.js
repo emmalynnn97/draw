@@ -9,10 +9,8 @@ function Recorder( context ) {
   const client = new Client( context );
   
   const commands = [
-    new Uint8Array( [ 0, 0 ] ),
-    new Uint8Array( [ 0, 1 ] ),
     /* 0 */ new DataView( new ArrayBuffer( 1 + 1 + 2 + 2 + 1 ) ),
-    /* 1 */ new Uint8Array( [ 0, 3 ] ),
+    /* 1 */ new DataView( new ArrayBuffer( 1 + 1 ) ),
     /* 2 */ new DataView( new ArrayBuffer( 1 + 1 + 2 + 2 ) ),
     /* 3 */ new DataView( new ArrayBuffer( 1 + 1 + 1 + 1 ) )
   ];
@@ -35,16 +33,16 @@ function Recorder( context ) {
       let dx = x - cx;
       let dy = y - cy;
       if ( isNotInt8( dx ) || isNotInt8( dy ) ) {
-        command = commands[ 4 ];
-        command.setUint8( 1, 4 );
+        command = commands[ 2 ];
+        command.setUint8( 1, 2 );
         command.setUint16( 2, x );
         command.setUint16( 4, y ); 
         // debug
         // context.fillStyle = 'blue';
         // context.fillRect( x - 2, y - 2, 4, 4 );
       } else {
-        command = commands[ 5 ];
-        command.setUint8( 1, 5 );
+        command = commands[ 3 ];
+        command.setUint8( 1, 3 );
         command.setInt8( 2, dx );
         command.setInt8( 3, dy );
         // debug
@@ -60,8 +58,8 @@ function Recorder( context ) {
     },
     down: function ( x, y ) {
       client.down( x, y, ccolor );
-      let command = commands[ 2 ];
-      command.setUint8( 1, 2 );
+      let command = commands[ 0 ];
+      command.setUint8( 1, 0 );
       command.setUint16( 2, x );
       command.setUint16( 4, y );
       command.setUint8( 6, ccolor );
@@ -69,7 +67,8 @@ function Recorder( context ) {
     },
     up: function () {
       client.up();
-      let command = commands[ 3 ];
+      let command = commands[ 1 ];
+      command.setUint8( 1, 1 );
       return command.buffer;
     }
   };
