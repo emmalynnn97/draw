@@ -1,45 +1,44 @@
 function Recorder( context ) {
 
-  let cx = 0;
-  let cy = 0;
-
-  let byteOffset = 0;
-  let byteTotal = ( 2 * 4 ) + ( 30 * 2 );
-  let buffer = new ArrayBuffer( byteTotal );
-  let commands = [
+  const commands = [
     new Uint8Array( [ 0, 0 ] ),
     new Uint8Array( [ 0, 1 ] ),
-    new ArrayBuffer( 1 + 1 ),
-    new Uint8Array( [ 0, 1 ] ),
-    new ArrayBuffer( 1 + 1 ),
+    new Uint8Array( [ 0, 2 ] ),
+    new Uint8Array( [ 0, 3 ] ),
+    new DataView( new ArrayBuffer( 1 + 1 + 2 + 2 ) ),
+    new DataView( new ArrayBuffer( 1 + 1 + 1 + 1 ) )
   ];
+
+  let cx = 0;
+  let cy = 0;
   
-  let data = new DataView( buffer );
+  function isInt8( value ) {
+    
+    return value <= 127 && value >= - 128;
+    
+  }
 
   return {
-    getBuffer: function () {
-      return buffer;
-    },
-    isFull: function () {
-      return byteOffset === byteTotal;
-    },
-    moveTo: function ( x, y ) {        
-      context.fillStyle = 'red';
-      context.fillRect( x - 1, y - 1, 2, 2 );
-      if ( byteOffset === 0 ) {
-        data.setUint16( byteOffset + 0, x );
-        data.setUint16( byteOffset + 2, y );
-        byteOffset += 4;
+    moveTo: function ( x, y ) {
+      let dx = x - cx;
+      let dy = y - cy;
+      if ( isInt8( dx ) && isInt8( dy ) ) {
+        let command = commands[ 5 ];
+        command.setInt8( 2, dx );
+        command.setInt8( 2, dy );
+        // debug
+        context.fillStyle = 'red';
+        context.fillRect( x - 2, y - 2, 4, 4 );
       } else {
-        data.setUint8( byteOffset + 0, x - cx );
-        data.setUint8( byteOffset + 1, y - cy );
-        byteOffset += 2;
+        let command = commands[ 4 ];
+        command.setUint16( 2, dx );
+        command.setUint16( 2, dy );        
+        // debug
+        context.fillStyle = 'blue';
+        context.fillRect( x - 2, y - 2, 4, 4 );
       }
       cx = x;
       cy = y;
-    },
-    reset: function () {
-      byteOffset = 0;
     }
   };
   
