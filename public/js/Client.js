@@ -10,11 +10,10 @@ function Client( context, dom ) {
   c.width = 16 * dpr;
   c.height = 16 * dpr;
   c.style.position = 'absolute';
-  c.style.top = 0;
-  c.style.left = 0;
   c.style.width = '16px';
   c.style.height = '16px';
   c.style.pointerEvents = 'none';
+  c.style.display = 'none';
 
   let ctx = c.getContext("2d");
   ctx.lineWidth = 0.5;
@@ -46,7 +45,9 @@ function Client( context, dom ) {
       context.beginPath();
       context.moveTo( x1, y1 );
       context.lineTo( x2, y2 );
-      context.strokeStyle = ccolor === 1 ? 'rgba(255, 255, 255, ' + ( 1 - d )  + ')' : 'rgba(0, 0, 0, ' + ( 1 - d )  + ')';
+      context.strokeStyle = ccolor === 0
+        ? 'rgba(0, 0, 0, ' + ( 0.7 - d )  + ')'
+        : 'rgba(255, 255, 255, ' + ( 1 - d )  + ')';
       context.stroke();
       
     }
@@ -78,10 +79,12 @@ function Client( context, dom ) {
           break;
 
         case 5:
-          this.move(
-            cx + data.getInt8( 2 ),
-            cy + data.getInt8( 3 )
-          );
+          if ( cx !== null ) {
+            this.move(
+              cx + data.getInt8( 2 ),
+              cy + data.getInt8( 3 )
+            );            
+          }
           break;  
         
         case 6:
@@ -123,8 +126,10 @@ function Client( context, dom ) {
 
     },
     disconnect: function () {
-      
+
       c.style.display = 'none';
+      cx = null;
+      cy = null;
       
     }
     
