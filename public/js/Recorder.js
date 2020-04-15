@@ -9,7 +9,7 @@ function Recorder( context ) {
   const client = new Client( context );
   
   const commands = [
-    // 0: POINTER_DOWN: USER_ID(UINT8), EVENT_ID(UINT8), X(UINT16), Y(UINT16), COLOR(UINT8)
+    // 0: POINTER_DOWN: USER_ID(UINT8), EVENT_ID(UINT8), X(UINT16), Y(UINT16), COLOR_ID(UINT8)
     new DataView( new ArrayBuffer( 1 + 1 + 2 + 2 + 1 ) ),
     // 1: POINTER_UP: USER_ID(UINT8), EVENT_ID(UINT8)
     new DataView( new ArrayBuffer( 1 + 1 ) ),

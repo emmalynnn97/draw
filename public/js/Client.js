@@ -56,6 +56,9 @@ function Client( context, dom ) {
         case 2:
           context.strokeStyle = 'rgba(255, 0, 0, ' + ( 0.7 - d )  + ')';
           break;
+        case 3:
+          context.strokeStyle = 'rgba(255, 0, 255, ' + ( 0.7 - d )  + ')';
+          break;
       }      
       
       context.stroke();
