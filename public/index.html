@@ -84,7 +84,7 @@
         canvas.addEventListener( 'pointerdown', onPointerDown );
         canvas.addEventListener( 'pointerup', onPointerUp );
 
-        document.getElementById( 'status' ).textContent = 'connected';    
+        document.getElementById( 'status' ).textContent = '🟢';    
 
       } );
 
@@ -96,7 +96,7 @@
         canvas.removeEventListener( 'pointerdown', onPointerDown );
         canvas.removeEventListener( 'pointerup', onPointerUp );
         
-        document.getElementById( 'status' ).textContent = 'disconnected';
+        document.getElementById( 'status' ).textContent = '🔴';
 
       } );
 
