@@ -45,14 +45,14 @@
       document.body.appendChild( canvas );
       
       const context = canvas.getContext( '2d' );
-      context.lineWidth = 0.5;
+      context.lineWidth = 0.5 * window.devicePixelRatio;
       
       window.addEventListener( 'resize', function () {
         
         canvas.width = window.innerWidth * window.devicePixelRatio;
         canvas.height = window.innerHeight * window.devicePixelRatio;   
         
-        context.lineWidth = 0.5;
+        context.lineWidth = 0.5 * window.devicePixelRatio;
         
       } );
 
