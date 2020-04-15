@@ -13,13 +13,15 @@
         margin: 0;
         font-size: 14px;
         font-family: sans-serif;
-        overflow: hidden;
       }
       #canvas {
         display: block;
         width: 100%;
         height: 100%;
         cursor: crosshair;
+      }
+      #cursors {
+        overflow: hidden;
       }
       #status {
         position: absolute;
@@ -30,6 +32,7 @@
     </style>
   </head>
   <body>
+    <div id="cursors"></div>
     <div id="status"></div>
     <script type="module">
       
@@ -98,7 +101,8 @@
       
         if ( clients[ id ] === undefined ) {
           
-          clients[ id ] = new Client( context, document.body );
+          let container = document.getElementById( 'cursors' );
+          clients[ id ] = new Client( context, container );
           
         }
         
