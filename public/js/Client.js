@@ -113,6 +113,8 @@ function Client( context, dom ) {
     },
     down: function ( x, y, color ) {
 
+      c.style.display = '';
+
       isPointerDown = true;
       cx = x;
       cy = y;
@@ -120,6 +122,8 @@ function Client( context, dom ) {
 
     },
     up: function () {
+
+      c.style.display = 'none';
 
       isPointerDown = false;
       isNewLine = true;

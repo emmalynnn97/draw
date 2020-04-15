@@ -78,6 +78,7 @@
       
       let clients = {};
       let recorder = null;
+      let isPointerDown = false;
       
       // WebSockets
             
@@ -165,15 +166,21 @@
         ptime = time;
 
         //
+        
+        if ( isPointerDown ) {
 
-        const x = parseInt( event.pageX * window.devicePixelRatio );
-        const y = parseInt( event.pageY * window.devicePixelRatio );
+          const x = parseInt( event.pageX * window.devicePixelRatio );
+          const y = parseInt( event.pageY * window.devicePixelRatio );
 
-        ws.send( recorder.move( x, y ) );
+          ws.send( recorder.move( x, y ) );
+
+        }
 
       }
       
       function onPointerDown( even ) {
+        
+        isPointerDown = true;
 
         const x = parseInt( event.pageX * window.devicePixelRatio );
         const y = parseInt( event.pageY * window.devicePixelRatio );
@@ -183,6 +190,8 @@
       }
       
       function onPointerUp( event ) {
+        
+        isPointerDown = false;
         
         ws.send( recorder.up() );
         
