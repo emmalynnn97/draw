@@ -15,6 +15,8 @@ function findSpot( ws ) {
     if ( room[ i ] === undefined ) {
       
       room[ i ] = ws;
+      ws._id = i; // Uhmm
+      return;
       
     }
     
@@ -25,6 +27,12 @@ function findSpot( ws ) {
 function emptySpot( ws ) {
   
   var index = room.indefOf( ws );
+  
+  if ( index !== -1 ) {
+    
+    room.splice( index, 1 );
+    
+  }
   
 }
 
@@ -46,7 +54,11 @@ app.ws( '/', function ( ws, request ) {
     
     aWss.clients.forEach( function ( client ) {
       
-      client.send( data );
+      if ( client !== ws ) {
+
+        client.send( data );
+
+      }
 
     } );
 
