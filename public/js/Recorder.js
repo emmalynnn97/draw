@@ -9,10 +9,10 @@ function Recorder( context ) {
   const client = new Client( context );
   
   const commands = [
-    /* 0 */ new DataView( new ArrayBuffer( 1 + 1 + 2 + 2 + 1 ) ),
-    /* 1 */ new DataView( new ArrayBuffer( 1 + 1 ) ),
-    /* 2 */ new DataView( new ArrayBuffer( 1 + 1 + 2 + 2 ) ),
-    /* 3 */ new DataView( new ArrayBuffer( 1 + 1 + 1 + 1 ) )
+    /* 0: POINTER_DOWN */ new DataView( new ArrayBuffer( 1 + 1 + 2 + 2 + 1 ) ),
+    /* 1: POINTER_UP */ new DataView( new ArrayBuffer( 1 + 1 ) ),
+    /* 2: POINTER_MOVE_ABS */ new DataView( new ArrayBuffer( 1 + 1 + 2 + 2 ) ),
+    /* 3: POINTER_MOVE_REL */ new DataView( new ArrayBuffer( 1 + 1 + 1 + 1 ) )
   ];
 
   let cx = 0;
@@ -26,7 +26,9 @@ function Recorder( context ) {
   }
 
   return {
+
     move: function ( x, y ) {
+
       client.move( x, y );
       
       let command;
@@ -63,14 +65,18 @@ function Recorder( context ) {
       command.setUint16( 2, x );
       command.setUint16( 4, y );
       command.setUint8( 6, ccolor );
-      return command.buffer;      
+      return command.buffer;
+
     },
     up: function () {
+
       client.up();
       let command = commands[ 1 ];
       command.setUint8( 1, 1 );
       return command.buffer;
+
     }
+
   };
   
 }

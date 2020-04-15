@@ -10,7 +10,7 @@ const aWss = expressWs.getWss('/');
 
 app.use( express.static( 'public' ) );
 
-// TODO: Limit to less users.
+// TODO: Limit users somehow
 
 const room = new Array( 255 );
 

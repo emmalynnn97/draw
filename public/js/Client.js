@@ -55,11 +55,12 @@ function Client( context, dom ) {
   }
 
   return {
+
     execute: function ( data ) {
       
       switch ( data.getUint8( 1 ) ) {
 
-        case 0:
+        case 0: // POINTER_DOWN
           this.down(
             data.getUint16( 2 ),
             data.getUint16( 4 ),
@@ -67,18 +68,18 @@ function Client( context, dom ) {
           );
           break;
           
-        case 1:
+        case 1: // POINTER_UP
           this.up();
           break;
           
-        case 2:
+        case 2: // POINTER_MOVE_ABS
           this.move(
             data.getUint16( 2 ),
             data.getUint16( 4 )
           );
           break;
 
-        case 3:
+        case 3: // POINTER_DOWN_REL
           if ( cx !== null ) {
             this.move(
               cx + data.getInt8( 2 ),
@@ -87,7 +88,7 @@ function Client( context, dom ) {
           }
           break;  
         
-        case 6:
+        case 6: // USER_DISCONNECT
           this.disconnect();
           break;
       }

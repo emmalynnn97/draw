@@ -156,9 +156,9 @@
         
         event.preventDefault();
 
-        // Throttle to 30Hz
+        // Throttle to 5Hz
 
-        const throttle = ( 1 / 30 ) * 100;
+        const throttle = ( 1 / 5 ) * 100;
         const time = event.timeStamp;
 
         if ( time < ( ptime + throttle ) ) return;
