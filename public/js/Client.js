@@ -61,7 +61,8 @@ function Client( context, dom ) {
         case 2:
           this.down(
             data.getUint16( 2 ),
-            data.getUint16( 4 )
+            data.getUint16( 4 ),
+            data.getUint8( 6 )
           );
           break;
           

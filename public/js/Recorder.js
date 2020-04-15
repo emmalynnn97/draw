@@ -19,7 +19,7 @@ function Recorder( context ) {
 
   let cx = 0;
   let cy = 0;
-  let ccolor = 1;
+  let ccolor = 0;
   
   function isNotInt8( value ) {
     
@@ -59,7 +59,7 @@ function Recorder( context ) {
       ccolor = color;
     },
     down: function ( x, y ) {
-      client.down( x, y );
+      client.down( x, y, ccolor );
       let command = commands[ 2 ];
       command.setUint8( 1, 2 );
       command.setUint16( 2, x );

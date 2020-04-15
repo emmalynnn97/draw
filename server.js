@@ -10,6 +10,8 @@ const aWss = expressWs.getWss('/');
 
 app.use( express.static( 'public' ) );
 
+//
+
 const room = new Array( 255 );
 
 function findSpot( ws ) {
