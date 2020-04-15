@@ -2,7 +2,7 @@ function Client( context, dom ) {
   
   let dpr = window.devicePixelRatio;
   
-  var c = document.createElement( 'canvas' );
+  let c = document.createElement( 'canvas' );
   c.width = 16 * dpr;
   c.height = 16 * dpr;
   c.style.position = 'absolute';
@@ -11,7 +11,7 @@ function Client( context, dom ) {
   c.style.width = '16px';
   c.style.height = '16px';
 
-  var ctx = c.getContext("2d");
+  let ctx = c.getContext("2d");
   ctx.lineWidth = 0.5;
   ctx.beginPath();
   ctx.arc( 8 * dpr, 8 * dpr, 7, 0, Math.PI * 2 );
@@ -67,7 +67,11 @@ function Client( context, dom ) {
             cx + data.getInt8( 2 ),
             cy + data.getInt8( 3 )
           );
-          break;          
+          break;  
+        
+        case 6:
+          this.disconnect();
+          break;
       }
 
     },
@@ -101,6 +105,11 @@ function Client( context, dom ) {
       cx = null;
       cy = null;
 
+    },
+    disconnect: function () {
+      
+      c.remove();
+      
     }
     
   };

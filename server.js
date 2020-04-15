@@ -40,6 +40,18 @@ app.ws( '/', function ( ws, request ) {
   ws._id = findSpot( ws );
   
   ws.on( 'close', function () {
+    
+    var data = Buffer.from( [  ws._id , 6 ] );
+
+    aWss.clients.forEach( function ( client ) {
+
+      if ( client !== ws ) {
+
+        client.send( data );
+
+      }
+
+    } );
 
     emptySpot( ws );
   
