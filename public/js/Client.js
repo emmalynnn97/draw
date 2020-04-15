@@ -10,6 +10,7 @@ function Client( context, dom ) {
   c.style.left = 0;
   c.style.width = '16px';
   c.style.height = '16px';
+  c.style.pointerEvents = 'none';
 
   let ctx = c.getContext("2d");
   ctx.lineWidth = 0.5;

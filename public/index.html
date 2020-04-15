@@ -25,6 +25,7 @@
         position: absolute;
         left: 15px;
         top: 10px;
+        pointer-events: none;
       }
     </style>
   </head>
@@ -49,7 +50,9 @@
       window.addEventListener( 'resize', function () {
         
         canvas.width = window.innerWidth * window.devicePixelRatio;
-        canvas.height = window.innerHeight * window.devicePixelRatio;        
+        canvas.height = window.innerHeight * window.devicePixelRatio;   
+        
+        context.lineWidth = 0.5;
         
       } );
 
