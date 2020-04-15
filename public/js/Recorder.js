@@ -2,7 +2,7 @@ import { Client } from './Client.js';
 
 function Recorder( context ) {
   
-  const client = new Client( context, 'black' );
+  const client = new Client( context );
   
   const commands = [
     new Uint8Array( [ 0, 0 ] ),

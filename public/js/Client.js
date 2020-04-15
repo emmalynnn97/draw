@@ -1,4 +1,9 @@
-function Client( context, color ) {
+function Client( context, dom ) {
+  
+  if ( dom ) {
+    
+    
+  }
   
   let cx = null;
   let cy = null;
@@ -15,7 +20,6 @@ function Client( context, color ) {
     context.beginPath();
     context.moveTo( x1, y1 );
     context.lineTo( x2, y2 );
-    // context.strokeStyle = color;
     context.strokeStyle = 'rgba(0, 0, 0, ' + ( 1 - d )  + ')';
     context.stroke();
 
