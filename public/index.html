@@ -44,8 +44,8 @@
 
       //
       
-      const player = new Player( context );
-      const recorder = new Recorder( context );
+      let player = new Player( context );
+      let recorder = null;
       
       // WebSockets
             
@@ -54,12 +54,14 @@
 
       ws.addEventListener( 'open', function ( event ) {
 
+        recorder = new Recorder( context );
         document.getElementById( 'status' ).textContent = 'connected';
 
       } );
 
       ws.addEventListener( 'close', function ( event ) {
 
+        recorder = null;
         document.getElementById( 'status' ).textContent = 'disconnected';
 
       } );
@@ -85,22 +87,25 @@
         
         event.preventDefault();
 
-        // Throttle to 60Hz
-        
-        const throttle = ( 1 / 60 ) * 100;
-        const time = event.timeStamp;
-        
-        if ( time < ( prevTime + throttle ) ) return;
-        
-        prevTime = time;
-        
-        //
+        if ( recorder ) {
 
-        const x = parseInt( event.pageX * window.devicePixelRatio );
-        const y = parseInt( event.pageY * window.devicePixelRatio );
-        
-        let command = recorder.moveTo( x, y );
-        ws.send( command.buffer );
+          // Throttle to 60Hz
+
+          const throttle = ( 1 / 60 ) * 100;
+          const time = event.timeStamp;
+
+          if ( time < ( prevTime + throttle ) ) return;
+
+          prevTime = time;
+
+          //
+
+          const x = parseInt( event.pageX * window.devicePixelRatio );
+          const y = parseInt( event.pageY * window.devicePixelRatio );
+
+          ws.send( recorder.moveTo( x, y ) );
+          
+        }
 
       } );
       

@@ -19,18 +19,18 @@ function Player( context ) {
       let px = cx;
       let py = cy;
       
-      console.log( data.getUint8( 3 ) );
+      // console.log( data.getUint8( 1 ) );
 
-      switch ( data.getUint8( 2 ) ) {
+      switch ( data.getUint8( 1 ) ) {
 
         case 4:
-          cx = data.getUint16( 3 );
-          cy = data.getUint16( 5 );
+          cx = data.getUint16( 2 );
+          cy = data.getUint16( 3 );
           break;
 
         case 5:
-          cx += data.getInt8( 3 );
-          cy += data.getInt8( 4 );
+          cx += data.getInt8( 2 );
+          cy += data.getInt8( 3 );
           break;          
       }
       
