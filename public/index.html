@@ -43,7 +43,7 @@
       import { Client } from './js/Client.js';
       import { Recorder } from './js/Recorder.js';
       
-      const debug = window.location.search === '?debug';
+      // const debug = window.location.search === '?debug';
       
       // Canvas
       
@@ -82,7 +82,6 @@
         canvas.addEventListener( 'pointermove', onPointerMove );
         canvas.addEventListener( 'pointerdown', onPointerDown );
         canvas.addEventListener( 'pointerup', onPointerUp );
-        
 
         document.getElementById( 'status' ).textContent = 'connected';    
 
@@ -111,6 +110,17 @@
           clients[ id ] = new Client( context, container );
           
         }
+        
+        /*
+        if ( debug === true ) {
+          
+          console.log(
+            dataview.getUint8( 0 ),
+            dataview.getUint8( 1 )
+          );
+          
+        }
+        */
         
         clients[ id ].execute( dataview );
 

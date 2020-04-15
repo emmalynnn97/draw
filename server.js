@@ -1,3 +1,7 @@
+/**
+ * @author mrdoob / http://mrdoob.com/
+ */
+
 const express = require( 'express' );
 const app = express();
 
@@ -29,7 +33,7 @@ function emptySpot( ws ) {
   
   if ( index !== -1 ) {
     
-    room.splice( index, 1 );
+    room[ index ] = undefined;
     
   }
   
