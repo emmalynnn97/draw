@@ -30,7 +30,7 @@
     <div id="status"></div>
     <script type="module">
       
-      import { Player } from './js/Player.js';
+      import { Client } from './js/Client.js';
       import { Recorder } from './js/Recorder.js';
       
       // Canvas
@@ -44,7 +44,7 @@
 
       //
       
-      let player = new Player( context );
+      let clients = {};
       let recorder = null;
       
       // WebSockets
@@ -79,7 +79,16 @@
 
       ws.addEventListener( 'message', function ( event ) {
 
-        player.execute( new DataView( event.data ) );
+        let view = new DataView( event.data );
+        let id = view.getUint8( 0 );
+      
+        if ( clients[ id ] === undefined ) {
+          
+          clients[ id ] = new Client( context );
+          
+        }
+        if ( clients[ ])
+        player.execute(  );
 
       } );
       

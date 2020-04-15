@@ -47,20 +47,13 @@ app.ws( '/', function ( ws, request ) {
   
   ws.on( 'message', function ( data ) {
     
-    console.log( data );
-    
-    let array = new ArrayBuffer( data );
-    let view = new DataView( array );
-    
-    console.log( view );
-    
-    view.setUint8( 1, ws._id );
+    data.writeUInt8( ws._id , 0 );
     
     aWss.clients.forEach( function ( client ) {
       
       if ( client !== ws ) {
 
-        client.send( view.buffer );
+        client.send( data );
 
       }
 

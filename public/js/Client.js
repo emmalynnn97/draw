@@ -1,4 +1,4 @@
-function Player( context ) {
+function Client( context ) {
   
   let cx = null;
   let cy = null;
@@ -59,4 +59,4 @@ function Player( context ) {
   
 }
 
-export { Player }
+export { Client }
