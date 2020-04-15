@@ -7,11 +7,16 @@ function Client( context, color ) {
   function draw( x1, y1, x2, y2 ) {
     
     if ( x1 === null ) return;
+    
+    let dx = x2 - x1;
+		let dy = y2 - y1;
+		let d = Math.sqrt( dx * dx + dy * dy ) * 0.02;
 
     context.beginPath();
     context.moveTo( x1, y1 );
     context.lineTo( x2, y2 );
-    context.strokeStyle = 'black'; // color;
+    // context.strokeStyle = color;
+    context.strokeStyle = 'rgba(0, 0, 0, ' + ( 1 - d )  + ')';
     context.stroke();
 
   }

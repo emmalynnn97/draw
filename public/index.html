@@ -11,6 +11,7 @@
       }
       body {
         margin: 0;
+        font-size: 14px;
         font-family: sans-serif;
       }
       canvas {
@@ -21,7 +22,7 @@
       }
       #status {
         position: absolute;
-        left: 20px;
+        left: 15px;
         top: 10px;
       }
     </style>
@@ -41,6 +42,14 @@
       document.body.appendChild( canvas );
       
       const context = canvas.getContext( '2d' );
+      context.lineWidth = 0.5;
+      
+      window.addEventListener( 'resize', function () {
+        
+        canvas.width = window.innerWidth * window.devicePixelRatio;
+        canvas.height = window.innerHeight * window.devicePixelRatio;        
+        
+      } );
 
       //
       
