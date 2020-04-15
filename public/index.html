@@ -131,11 +131,11 @@
       // Recorder
       
       let color = 0;
-      let colors = [ '⚫️', '⚪️' ];
+      let colors = [ '⚫️', '🔵', '🔴' ];
       
       function onColorClick() {
 
-        color = ( color + 1 ) % 2;
+        color = ( color + 1 ) % 3;
         colorButton.textContent = colors[ color ];
         
         recorder.color( color );

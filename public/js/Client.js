@@ -45,9 +45,19 @@ function Client( context, dom ) {
       context.beginPath();
       context.moveTo( x1, y1 );
       context.lineTo( x2, y2 );
-      context.strokeStyle = ccolor === 0
-        ? 'rgba(0, 0, 0, ' + ( 0.7 - d )  + ')'
-        : 'rgba(255, 255, 255, ' + ( 1 - d )  + ')';
+
+      switch ( ccolor ) {
+        case 0:
+          context.strokeStyle = 'rgba(0, 0, 0, ' + ( 0.7 - d )  + ')';
+          break;
+        case 1:
+          context.strokeStyle = 'rgba(0, 0, 255, ' + ( 0.7 - d )  + ')';
+          break;
+        case 2:
+          context.strokeStyle = 'rgba(255, 0, 0, ' + ( 0.7 - d )  + ')';
+          break;
+      }      
+      
       context.stroke();
       
     }

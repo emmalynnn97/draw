@@ -9,11 +9,14 @@ function Recorder( context ) {
   const client = new Client( context );
   
   const commands = [
-    // 0: POINTER_DOWN
-    /* 0: POINTER_DOWN */ new DataView( new ArrayBuffer( 1 + 1 + 2 + 2 + 1 ) ),
-    /* 1: POINTER_UP */ new DataView( new ArrayBuffer( 1 + 1 ) ),
-    /* 2: POINTER_MOVE_ABS */ new DataView( new ArrayBuffer( 1 + 1 + 2 + 2 ) ),
-    /* 3: POINTER_MOVE_REL */ new DataView( new ArrayBuffer( 1 + 1 + 1 + 1 ) )
+    // 0: POINTER_DOWN: USER_ID(UINT8), EVENT_ID(UINT8), X(UINT16), Y(UINT16), COLOR(UINT8)
+    new DataView( new ArrayBuffer( 1 + 1 + 2 + 2 + 1 ) ),
+    // 1: POINTER_UP: USER_ID(UINT8), EVENT_ID(UINT8)
+    new DataView( new ArrayBuffer( 1 + 1 ) ),
+    // 1: POINTER_MOVE_ABS: USER_ID(UINT8), EVENT_ID(UINT8), X(UINT16), Y(UINT16)
+    new DataView( new ArrayBuffer( 1 + 1 + 2 + 2 ) ),
+    // 1: POINTER_MOVE_REL: USER_ID(UINT8), EVENT_ID(UINT8), DX(INT8), DY(INT8)
+    new DataView( new ArrayBuffer( 1 + 1 + 1 + 1 ) )
   ];
 
   let cx = 0;
