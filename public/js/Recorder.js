@@ -11,10 +11,10 @@ function Recorder( context ) {
   const commands = [
     new Uint8Array( [ 0, 0 ] ),
     new Uint8Array( [ 0, 1 ] ),
-    new DataView( new ArrayBuffer( 1 + 1 + 2 + 2 + 1 ) ),
-    new Uint8Array( [ 0, 3 ] ),
-    new DataView( new ArrayBuffer( 1 + 1 + 2 + 2 ) ),
-    new DataView( new ArrayBuffer( 1 + 1 + 1 + 1 ) )
+    /* 0 */ new DataView( new ArrayBuffer( 1 + 1 + 2 + 2 + 1 ) ),
+    /* 1 */ new Uint8Array( [ 0, 3 ] ),
+    /* 2 */ new DataView( new ArrayBuffer( 1 + 1 + 2 + 2 ) ),
+    /* 3 */ new DataView( new ArrayBuffer( 1 + 1 + 1 + 1 ) )
   ];
 
   let cx = 0;

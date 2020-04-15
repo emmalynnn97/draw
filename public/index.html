@@ -10,15 +10,15 @@
         touch-action: none;
       }
       body {
-        background: #f0f0f0;
+        background: #ffffff;
         font-size: 12px;
         font-family: sans-serif;
         margin: 0;
+        overflow: hidden;
       }
       #canvas {
+        background: #f0f0f0;
         display: block;
-        width: 100%;
-        height: 100%;
         cursor: crosshair;
       }
       #cursors {
@@ -59,8 +59,6 @@
       
       import { Client } from './js/Client.js';
       import { Recorder } from './js/Recorder.js';
-      
-      // const debug = window.location.search === '?debug';
 
       let colorButton = document.getElementById( 'color' );
       
@@ -70,19 +68,12 @@
       canvas.id = 'canvas';
       canvas.width = window.innerWidth * window.devicePixelRatio;
       canvas.height = window.innerHeight * window.devicePixelRatio;
+      canvas.style.width = window.innerWidth + 'px';
+      canvas.style.height = window.innerHeight + 'px';
       document.body.appendChild( canvas );
       
       const context = canvas.getContext( '2d' );
       context.lineWidth = 0.5 * window.devicePixelRatio;
-      
-      window.addEventListener( 'resize', function () {
-        
-        canvas.width = window.innerWidth * window.devicePixelRatio;
-        canvas.height = window.innerHeight * window.devicePixelRatio;   
-        
-        context.lineWidth = 0.5 * window.devicePixelRatio;
-        
-      } );
 
       //
       
@@ -131,17 +122,6 @@
           clients[ id ] = new Client( context, container );
           
         }
-        
-        /*
-        if ( debug === true ) {
-          
-          console.log(
-            dataview.getUint8( 0 ),
-            dataview.getUint8( 1 )
-          );
-          
-        }
-        */
         
         clients[ id ].execute( dataview );
 
