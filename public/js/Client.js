@@ -22,10 +22,14 @@ function Client( context, dom ) {
   let cx = null;
   let cy = null;
   let isPointerDown = false;
+  let isNewLine = false;
   
   function draw( x1, y1, x2, y2 ) {
     
-    if ( x1 === null ) return;
+    if ( isNewLine === true ) {
+      isNewLine = false;
+      return;
+    }
     
     let dx = x2 - x1;
 		let dy = y2 - y1;
@@ -85,11 +89,12 @@ function Client( context, dom ) {
 
       cx = x;
       cy = y;
+
+      //
       
-      if ( c ) {
-        c.style.left = ( ( x / dpr ) - 8 ) + 'px';
-        c.style.top = ( ( y / dpr ) - 8 ) + 'px';  
-      }
+      c.style.left = ( ( x / dpr ) - 8 ) + 'px';
+      c.style.top = ( ( y / dpr ) - 8 ) + 'px';
+      c.style.display = '';
 
     },
     down: function ( x, y ) {
@@ -102,13 +107,12 @@ function Client( context, dom ) {
     up: function () {
 
       isPointerDown = false;
-      cx = null;
-      cy = null;
+      isNewLine = true;
 
     },
     disconnect: function () {
       
-      c.remove();
+      c.style.display = 'none';
       
     }
     
