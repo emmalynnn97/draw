@@ -1,21 +1,23 @@
 function Client( context, dom ) {
   
-  if ( dom ) {
-    
-    var c = document.createElement( 'canvas' );
-    c.width = 16;
-    c.height = 16;
-    c.style.position = 'absolute';
-    c.style.top = 0;
-    c.style.left = 0;
-    
-    var ctx = c.getContext("2d");
-    ctx.beginPath();
-    ctx.arc( 8, 8, 7, 0, Math.PI * 2 );
-    ctx.stroke();
-    dom.appendChild( c );
-    
-  }
+  let dpr = window.devicePixelRatio;
+  
+  var c = document.createElement( 'canvas' );
+  c.width = 16 * dpr;
+  c.height = 16 * dpr;
+  c.style.position = 'absolute';
+  c.style.top = 0;
+  c.style.left = 0;
+  c.style.width = '16px';
+  c.style.height = '16px';
+
+  var ctx = c.getContext("2d");
+  ctx.lineWidth = 0.5;
+  ctx.beginPath();
+  ctx.arc( 8 * dpr, 8 * dpr, 7, 0, Math.PI * 2 );
+  ctx.stroke();
+
+  if ( dom ) dom.appendChild( c );
   
   let cx = null;
   let cy = null;
@@ -81,8 +83,8 @@ function Client( context, dom ) {
       cy = y;
       
       if ( c ) {
-        c.style.left = ( x * window.devicePixelRatio ) + 'px';
-        c.style.top = ( y * window.devicePixelRatio ) + 'px';  
+        c.style.left = ( ( x / dpr ) - 8 ) + 'px';
+        c.style.top = ( ( y / dpr ) - 8 ) + 'px';  
       }
 
     },
