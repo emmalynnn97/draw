@@ -6,9 +6,41 @@ const aWss = expressWs.getWss('/');
 
 app.use( express.static( 'public' ) );
 
+const room = new Array( 255 );
+
+function findSpot( ws ) {
+
+  for ( var i = 0; i < 255; i ++ ) {
+    
+    if ( room[ i ] === undefined ) {
+      
+      room[ i ] = ws;
+      
+    }
+    
+  }
+  
+}
+
+function emptySpot( ws ) {
+  
+  var index = room.indefOf( ws );
+  
+}
+
 app.ws( '/', function ( ws, request ) {
   
-  console.log( ws );
+  ws.on( 'open', function () {
+
+    findSpot( ws );
+  
+  } );
+  
+  ws.on( 'close', function () {
+
+    emptySpot( ws );
+  
+  } );
   
   ws.on( 'message', function ( data ) {
     
