@@ -79,16 +79,16 @@
 
       ws.addEventListener( 'message', function ( event ) {
 
-        let view = new DataView( event.data );
-        let id = view.getUint8( 0 );
+        let dataview = new DataView( event.data );
+        let id = dataview.getUint8( 0 );
       
         if ( clients[ id ] === undefined ) {
           
           clients[ id ] = new Client( context );
           
         }
-        if ( clients[ ])
-        player.execute(  );
+        
+        clients[ id ].execute( dataview );
 
       } );
       

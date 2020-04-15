@@ -53,6 +53,15 @@ function Client( context ) {
         
       }
     
+    },
+    move: function ( x, y ) {
+      
+    },
+    down: function ( x, y ) {
+      
+    },
+    up: function () {
+      
     }
     
   };
