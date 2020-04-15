@@ -6,6 +6,13 @@ function Recorder( context ) {
   let byteOffset = 0;
   let byteTotal = ( 2 * 4 ) + ( 30 * 2 );
   let buffer = new ArrayBuffer( byteTotal );
+  let commands = [
+    new Uint8Array( [ 0, 0 ] ),
+    new Uint8Array( [ 0, 1 ] ),
+    new ArrayBuffer( 1 + 1 ),
+    new Uint8Array( [ 0, 1 ] ),
+    new ArrayBuffer( 1 + 1 ),
+  ];
   
   let data = new DataView( buffer );
 
