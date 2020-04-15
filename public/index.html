@@ -30,9 +30,14 @@
       }
       #status {
         position: absolute;
-        left: 16px;
+        left: 12px;
         top: 10px;
         pointer-events: none;
+        padding: 0px 4px;
+        border: 2px solid white;
+        border-radius: 25px;
+        vertical-align: middle;
+        background-color: rgba(255,255,255,1);
       }
     </style>
   </head>
@@ -88,7 +93,7 @@
         canvas.addEventListener( 'pointerdown', onPointerDown );
         canvas.addEventListener( 'pointerup', onPointerUp );
 
-        document.getElementById( 'status' ).textContent = '🟢';    
+        document.getElementById( 'status' ).textContent = '🟢 | ⚫️';    
 
       } );
 
@@ -100,7 +105,7 @@
         canvas.removeEventListener( 'pointerdown', onPointerDown );
         canvas.removeEventListener( 'pointerup', onPointerUp );
         
-        document.getElementById( 'status' ).textContent = '🔴';
+        document.getElementById( 'status' ).textContent = '🔴 | ';
 
       } );
 
