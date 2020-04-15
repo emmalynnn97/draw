@@ -20,17 +20,18 @@ function Recorder( context ) {
 
   return {
     moveTo: function ( x, y ) {
+      let command;
       let dx = x - cx;
       let dy = y - cy;
       if ( isInt8( dx ) && isInt8( dy ) ) {
-        let command = commands[ 5 ];
+        command = commands[ 5 ];
         command.setInt8( 2, dx );
         command.setInt8( 2, dy );
         // debug
         context.fillStyle = 'red';
         context.fillRect( x - 2, y - 2, 4, 4 );
       } else {
-        let command = commands[ 4 ];
+        command = commands[ 4 ];
         command.setUint16( 2, dx );
         command.setUint16( 2, dy );        
         // debug
@@ -39,6 +40,7 @@ function Recorder( context ) {
       }
       cx = x;
       cy = y;
+      return command;
     }
   };
   

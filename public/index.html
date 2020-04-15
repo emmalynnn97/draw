@@ -66,18 +66,9 @@
 
       ws.addEventListener( 'message', function ( event ) {
 
-        player.setBuffer( event.data );
+        player.execute( new DataView( event.data ) );
 
       } );
-      
-      function animate() {
-
-        player.next();
-        requestAnimationFrame( animate );
-
-      }
-
-      requestAnimationFrame( animate );
       
       // Recorder
       
@@ -108,17 +99,8 @@
         const x = parseInt( event.pageX * window.devicePixelRatio );
         const y = parseInt( event.pageY * window.devicePixelRatio );
         
-        recorder.moveTo( x, y );
-        
-        /*
-        if ( recorder.isFull() ) {
-
-          ws.send( recorder.getBuffer() );
-
-          recorder.reset();
-
-        }
-        */
+        let command = recorder.moveTo( x, y );
+        ws.send( command.buffer );
 
       } );
       

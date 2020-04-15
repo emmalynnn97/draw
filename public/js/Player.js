@@ -1,64 +1,45 @@
 function Player( context ) {
   
-  let cx;
-  let cy;
+  let cx = null;
+  let cy = null;
   
-  let byteTotal = ( 2 * 4 ) + ( 30 * 2 );
-  let byteOffset = byteTotal;
-  
-  let data;
+  function draw( x1, y1, x2, y2 ) {
+
+    context.beginPath();
+    context.moveTo( x1, y1 );
+    context.lineTo( x2, y2 );
+    context.strokeStyle = 'blue';
+    context.stroke();
+
+  }
 
   return {
-    setBuffer: function ( buffer ) {
-      data = new DataView( buffer );
-      byteOffset = 0;
-    },
-    draw: function ( x1, y1, x2, y2 ) {
-
-      context.beginPath();
-      context.moveTo( x1, y1 );
-      context.lineTo( x2, y2 );
-      context.strokeStyle = 'blue';
-      context.stroke();
+    execute: function ( data ) {
       
-    },
-    next: function () {
+      let px = cx;
+      let py = cy;
       
-      if ( byteOffset === byteTotal ) return;
+      console.log( data.getUint8( 3 ) );
 
-      let mx;
-      let my;
+      switch ( data.getUint8( 2 ) ) {
 
-      if ( byteOffset === 0 ) {
-        
-        if ( cx ) {
-          
-          mx = cx;
-          my = cy;
-          
-        }
+        case 4:
+          cx = data.getUint16( 3 );
+          cy = data.getUint16( 5 );
+          break;
 
-        cx = data.getUint16( 0 );
-        cy = data.getUint16( 2 );
-        byteOffset += 4;
-        
-        if ( mx ) {
-          
-          this.draw( mx, my, cx, cy );          
-          
-        }
-
+        case 5:
+          cx += data.getInt8( 3 );
+          cy += data.getInt8( 4 );
+          break;          
       }
       
-      mx = cx;
-      my = cy;
-
-      cx += data.getInt8( byteOffset + 0 );
-      cy += data.getInt8( byteOffset + 1 );
-      byteOffset += 2;
-
-      this.draw( mx, my, cx, cy );          
-      
+      if ( px !== null && py !== null ) {
+        
+        draw( px, py, cx, cy );  
+        
+      }
+    
     }
     
   };
