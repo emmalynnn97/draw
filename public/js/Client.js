@@ -2,6 +2,18 @@ function Client( context, dom ) {
   
   if ( dom ) {
     
+    var c = document.createElement( 'canvas' );
+    c.width = 16;
+    c.height = 16;
+    c.style.position = 'absolute';
+    c.style.top = 0;
+    c.style.left = 0;
+    
+    var ctx = c.getContext("2d");
+    ctx.beginPath();
+    ctx.arc( 8, 8, 7, 0, Math.PI * 2 );
+    ctx.stroke();
+    dom.appendChild( c );
     
   }
   
@@ -59,12 +71,19 @@ function Client( context, dom ) {
     },
     move: function ( x, y ) {
 
-      if ( isPointerDown ) {        
+      if ( isPointerDown ) {
+
         draw( cx, cy, x, y );
+
       }
 
       cx = x;
       cy = y;
+      
+      if ( c ) {
+        c.style.left = ( x * window.devicePixelRatio ) + 'px';
+        c.style.top = ( y * window.devicePixelRatio ) + 'px';  
+      }
 
     },
     down: function ( x, y ) {

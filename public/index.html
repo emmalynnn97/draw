@@ -13,8 +13,9 @@
         margin: 0;
         font-size: 14px;
         font-family: sans-serif;
+        overflow: hidden;
       }
-      canvas {
+      #canvas {
         display: block;
         width: 100%;
         height: 100%;
@@ -37,6 +38,7 @@
       // Canvas
       
       const canvas = document.createElement( 'canvas' );
+      canvas.id = 'canvas';
       canvas.width = window.innerWidth * window.devicePixelRatio;
       canvas.height = window.innerHeight * window.devicePixelRatio;
       document.body.appendChild( canvas );
