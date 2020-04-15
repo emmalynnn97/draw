@@ -1,3 +1,7 @@
+/**
+ * @author mrdoob / http://mrdoob.com/
+ */
+
 import { Client } from './Client.js';
 
 function Recorder( context ) {
