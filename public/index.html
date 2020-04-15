@@ -61,6 +61,8 @@
       import { Recorder } from './js/Recorder.js';
       
       // const debug = window.location.search === '?debug';
+
+      let colorButton = document.getElementById( 'color' );
       
       // Canvas
       
@@ -99,6 +101,8 @@
         canvas.addEventListener( 'pointermove', onPointerMove );
         canvas.addEventListener( 'pointerdown', onPointerDown );
         canvas.addEventListener( 'pointerup', onPointerUp );
+              
+        colorButton.addEventListener( 'click', onColorClick );
 
         document.getElementById( 'status' ).textContent = '🟢';    
 
@@ -146,13 +150,17 @@
       
       // Recorder
       
-      let colorButton = document.getElementById( 'color' );
-      colorButton.addEventListener( 'click', function () {
-        
-        colorButton.textContent = colorButton.textContent === '⚫️' ? '⚪️' : '⚫️';
-        
-      } );
+      let color = 0;
+      let colors = [ '⚫️', '⚪️' ];
       
+      function onColorClick() {
+
+        color = ( color + 1 ) % 2;
+        colorButton.textContent = colors[ color ];
+
+      }
+      
+      // It's 2020 and WebKit/iOS still needs this...
 
       canvas.addEventListener( 'touchstart', function ( event ) {
         
@@ -166,25 +174,21 @@
         
         event.preventDefault();
 
-        if ( recorder ) {
+        // Throttle to 60Hz
 
-          // Throttle to 60Hz
+        const throttle = ( 1 / 60 ) * 100;
+        const time = event.timeStamp;
 
-          const throttle = ( 1 / 60 ) * 100;
-          const time = event.timeStamp;
+        if ( time < ( ptime + throttle ) ) return;
 
-          if ( time < ( ptime + throttle ) ) return;
+        ptime = time;
 
-          ptime = time;
+        //
 
-          //
+        const x = parseInt( event.pageX * window.devicePixelRatio );
+        const y = parseInt( event.pageY * window.devicePixelRatio );
 
-          const x = parseInt( event.pageX * window.devicePixelRatio );
-          const y = parseInt( event.pageY * window.devicePixelRatio );
-
-          ws.send( recorder.move( x, y ) );
-          
-        }
+        ws.send( recorder.move( x, y ) );
 
       }
       

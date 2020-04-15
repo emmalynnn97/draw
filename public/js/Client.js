@@ -26,6 +26,7 @@ function Client( context, dom ) {
   
   let cx = null;
   let cy = null;
+  let ccolor = null;
   let isPointerDown = false;
   let isNewLine = false;
   
@@ -40,11 +41,15 @@ function Client( context, dom ) {
 		let dy = y2 - y1;
 		let d = Math.sqrt( dx * dx + dy * dy ) * 0.02;
 
-    context.beginPath();
-    context.moveTo( x1, y1 );
-    context.lineTo( x2, y2 );
-    context.strokeStyle = 'rgba(0, 0, 0, ' + ( 1 - d )  + ')';
-    context.stroke();
+    if ( ccolor !== null ) {
+
+      context.beginPath();
+      context.moveTo( x1, y1 );
+      context.lineTo( x2, y2 );
+      context.strokeStyle = ccolor === 1 ? 'rgba(255, 255, 255, ' + ( 1 - d )  + ')' : 'rgba(0, 0, 0, ' + ( 1 - d )  + ')';
+      context.stroke();
+      
+    }
 
   }
 
@@ -102,11 +107,12 @@ function Client( context, dom ) {
       c.style.display = '';
 
     },
-    down: function ( x, y ) {
+    down: function ( x, y, color ) {
 
       isPointerDown = true;
       cx = x;
       cy = y;
+      ccolor = color;
 
     },
     up: function () {

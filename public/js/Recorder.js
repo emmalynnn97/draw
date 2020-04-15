@@ -11,7 +11,7 @@ function Recorder( context ) {
   const commands = [
     new Uint8Array( [ 0, 0 ] ),
     new Uint8Array( [ 0, 1 ] ),
-    new DataView( new ArrayBuffer( 1 + 1 + 2 + 2 ) ),
+    new DataView( new ArrayBuffer( 1 + 1 + 2 + 2 + 1 ) ),
     new Uint8Array( [ 0, 3 ] ),
     new DataView( new ArrayBuffer( 1 + 1 + 2 + 2 ) ),
     new DataView( new ArrayBuffer( 1 + 1 + 1 + 1 ) )
@@ -19,6 +19,7 @@ function Recorder( context ) {
 
   let cx = 0;
   let cy = 0;
+  let ccolor = 1;
   
   function isNotInt8( value ) {
     
@@ -54,12 +55,16 @@ function Recorder( context ) {
       cy = y;
       return command.buffer;
     },
+    color: function ( color ) {
+      ccolor = color;
+    },
     down: function ( x, y ) {
       client.down( x, y );
       let command = commands[ 2 ];
       command.setUint8( 1, 2 );
       command.setUint16( 2, x );
-      command.setUint16( 4, y );    
+      command.setUint16( 4, y );
+      command.setUint8( 6, ccolor );
       return command.buffer;      
     },
     up: function () {
