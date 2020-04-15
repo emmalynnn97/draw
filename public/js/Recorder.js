@@ -34,7 +34,9 @@ function Recorder( context ) {
       let command;
       let dx = x - cx;
       let dy = y - cy;
+
       if ( isNotInt8( dx ) || isNotInt8( dy ) ) {
+
         command = commands[ 2 ];
         command.setUint8( 1, 2 );
         command.setUint16( 2, x );
@@ -42,7 +44,9 @@ function Recorder( context ) {
         // debug
         // context.fillStyle = 'blue';
         // context.fillRect( x - 2, y - 2, 4, 4 );
+
       } else {
+
         command = commands[ 3 ];
         command.setUint8( 1, 3 );
         command.setInt8( 2, dx );
@@ -50,16 +54,24 @@ function Recorder( context ) {
         // debug
         // context.fillStyle = 'red';
         // context.fillRect( x - 2, y - 2, 4, 4 );
+
       }
+
       cx = x;
       cy = y;
+      
       return command.buffer;
+
     },
     color: function ( color ) {
+
       ccolor = color;
+
     },
     down: function ( x, y ) {
+
       client.down( x, y, ccolor );
+
       let command = commands[ 0 ];
       command.setUint8( 1, 0 );
       command.setUint16( 2, x );
@@ -71,6 +83,7 @@ function Recorder( context ) {
     up: function () {
 
       client.up();
+      
       let command = commands[ 1 ];
       command.setUint8( 1, 1 );
       return command.buffer;

@@ -160,6 +160,8 @@
 
         const throttle = ( 1 / 5 ) * 100;
         const time = event.timeStamp;
+        
+        console.log( event.timeStamp );
 
         if ( time < ( ptime + throttle ) ) return;
 
