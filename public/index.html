@@ -25,6 +25,7 @@
         width: 100%;
         height: 100%;
         overflow: hidden;
+        pointer-events: none;
       }
       #status {
         position: absolute;
@@ -41,6 +42,8 @@
       
       import { Client } from './js/Client.js';
       import { Recorder } from './js/Recorder.js';
+      
+      const debug = window.location.search === '?debug';
       
       // Canvas
       
