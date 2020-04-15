@@ -19,7 +19,7 @@ function Recorder( context ) {
   }
 
   return {
-    moveTo: function ( x, y ) {
+    move: function ( x, y ) {
       let command;
       let dx = x - cx;
       let dy = y - cy;
@@ -28,25 +28,27 @@ function Recorder( context ) {
         command.setUint8( 1, 4 );
         command.setUint16( 2, x );
         command.setUint16( 4, y );    
-        /*
         // debug
         context.fillStyle = 'blue';
         context.fillRect( x - 2, y - 2, 4, 4 );
-        */
       } else {
         command = commands[ 5 ];
         command.setUint8( 1, 5 );
         command.setInt8( 2, dx );
         command.setInt8( 3, dy );
-        /*
         // debug
         context.fillStyle = 'red';
         context.fillRect( x - 2, y - 2, 4, 4 );
-        */
       }
       cx = x;
       cy = y;
       return command.buffer;
+    },
+    down: function ( x, y ) {
+      return commands[ 2 ];      
+    },
+    up: function () {
+      return commands[ 3 ];
     }
   };
   

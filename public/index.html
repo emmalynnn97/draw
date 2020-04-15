@@ -57,6 +57,9 @@
         recorder = new Recorder( context );
 
         canvas.addEventListener( 'pointermove', onPointerMove );
+        canvas.addEventListener( 'pointerdown', onPointerDown );
+        canvas.addEventListener( 'pointerup', onPointerUp );
+        
 
         document.getElementById( 'status' ).textContent = 'connected';    
 
@@ -67,6 +70,8 @@
         recorder = null;
 
         canvas.removeEventListener( 'pointermove', onPointerMove );
+        canvas.removeEventListener( 'pointerdown', onPointerDown );
+        canvas.removeEventListener( 'pointerup', onPointerUp );
         
         document.getElementById( 'status' ).textContent = 'disconnected';
 
@@ -108,10 +113,22 @@
           const x = parseInt( event.pageX * window.devicePixelRatio );
           const y = parseInt( event.pageY * window.devicePixelRatio );
 
-          ws.send( recorder.moveTo( x, y ) );
+          ws.send( recorder.move( x, y ) );
           
         }
 
+      }
+      
+      function onPointerDown( even ) {
+
+        ws.send( recorder.down() );
+        
+      }
+      
+      function onPointerUp( event ) {
+        
+        ws.send( recorder.up() );
+        
       }
       
     </script>
