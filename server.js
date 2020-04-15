@@ -15,7 +15,9 @@ function findSpot( ws ) {
     if ( room[ i ] === undefined ) {
       
       room[ i ] = ws;
+      console.log( i );
       ws._id = i; // Uhmm
+      console.log( ws._id );
       return;
       
     }
@@ -38,21 +40,39 @@ function emptySpot( ws ) {
 
 app.ws( '/', function ( ws, request ) {
   
+  //console.log( 'request', ws );
+  
+  ws.on( 'connection', function () {
+
+    console.log( 'connection', ws );
+    findSpot( ws );
+  
+  } );
+  
+  ws.onopen = function () {
+    
+    console.log( 'open' );
+    
+  };
+  
   ws.on( 'open', function () {
 
+    console.log( 'open', ws );
     findSpot( ws );
   
   } );
   
   ws.on( 'close', function () {
 
-    emptySpot( ws );
+    emptySpot( 'close', ws );
   
   } );
   
   ws.on( 'message', function ( data ) {
     
     aWss.clients.forEach( function ( client ) {
+      
+      console.log( ws._id );
       
       if ( client !== ws ) {
 
