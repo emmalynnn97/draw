@@ -28,21 +28,28 @@
         overflow: hidden;
         pointer-events: none;
       }
-      #status {
+      #menu {
         position: absolute;
         left: 12px;
         top: 10px;
-        pointer-events: none;
+        color: #808080;
         padding: 0px 4px;
         border: 2px solid white;
         border-radius: 25px;
         vertical-align: middle;
         background-color: rgba(255,255,255,1);
       }
+      #color {
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
-    <div id="status"></div>
+    <div id="menu">
+      <span id="status">🟡</span>
+      <span style="margin-left:2px;margin-right:4px;">|</span>
+      <span id="color">⚫️</span>
+    </div>
     <div id="cursors"></div>
     <script type="module">
       
@@ -93,7 +100,7 @@
         canvas.addEventListener( 'pointerdown', onPointerDown );
         canvas.addEventListener( 'pointerup', onPointerUp );
 
-        document.getElementById( 'status' ).textContent = '🟢 | ⚫️';    
+        document.getElementById( 'status' ).textContent = '🟢';    
 
       } );
 
@@ -105,7 +112,7 @@
         canvas.removeEventListener( 'pointerdown', onPointerDown );
         canvas.removeEventListener( 'pointerup', onPointerUp );
         
-        document.getElementById( 'status' ).textContent = '🔴 | ';
+        document.getElementById( 'status' ).textContent = '🔴';
 
       } );
 
@@ -136,7 +143,16 @@
 
       } );
       
+      
       // Recorder
+      
+      let colorButton = document.getElementById( 'color' );
+      colorButton.addEventListener( 'click', function () {
+        
+        colorButton.textContent = colorButton.textContent === '⚫️' ? '⚪️' : '⚫️';
+        
+      } );
+      
 
       canvas.addEventListener( 'touchstart', function ( event ) {
         
