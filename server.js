@@ -45,7 +45,7 @@ app.ws( '/', function ( ws, request ) {
 
     aWss.clients.forEach( function ( client ) {
 
-      if ( client !== ws ) {
+      if ( client !== ws && client.readyState === client.OPEN ) {
 
         client.send( data );
 
@@ -63,7 +63,7 @@ app.ws( '/', function ( ws, request ) {
     
     aWss.clients.forEach( function ( client ) {
       
-      if ( client !== ws ) {
+      if ( client !== ws && client.readyState === client.OPEN ) {
 
         client.send( data );
 
