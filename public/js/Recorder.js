@@ -1,4 +1,8 @@
+import { Client } from './Client.js';
+
 function Recorder( context ) {
+  
+  const client = new Client( context, 'black' );
   
   const commands = [
     new Uint8Array( [ 0, 0 ] ),
@@ -11,19 +15,6 @@ function Recorder( context ) {
 
   let cx = 0;
   let cy = 0;
-  let isPointerDown = false;
-  
-  function draw( x1, y1, x2, y2 ) {
-    
-    if ( x1 === null ) return;
-
-    context.beginPath();
-    context.moveTo( x1, y1 );
-    context.lineTo( x2, y2 );
-    context.strokeStyle = 'black';
-    context.stroke();
-
-  }
   
   function isNotInt8( value ) {
     
@@ -33,6 +24,8 @@ function Recorder( context ) {
 
   return {
     move: function ( x, y ) {
+      client.move( x, y );
+      
       let command;
       let dx = x - cx;
       let dy = y - cy;
@@ -53,15 +46,12 @@ function Recorder( context ) {
         // context.fillStyle = 'red';
         // context.fillRect( x - 2, y - 2, 4, 4 );
       }
-      if ( isPointerDown ) {
-        draw( cx, cy, x, y );      
-      }
       cx = x;
       cy = y;
       return command.buffer;
     },
     down: function ( x, y ) {
-      isPointerDown = true;
+      client.down( x, y );
       let command = commands[ 2 ];
       command.setUint8( 1, 2 );
       command.setUint16( 2, x );
@@ -69,7 +59,7 @@ function Recorder( context ) {
       return command.buffer;      
     },
     up: function () {
-      isPointerDown = false;
+      client.up();
       let command = commands[ 3 ];
       return command.buffer;
     }
