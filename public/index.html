@@ -36,6 +36,7 @@
         border-radius: 25px;
         vertical-align: middle;
         background-color: rgba(255,255,255,1);
+        user-select: none;
       }
       #color {
         cursor: pointer;
@@ -71,7 +72,7 @@
       
       const context = canvas.getContext( '2d' );
       context.lineWidth = 0.5 * window.devicePixelRatio;
-      context.fillStyle = '#f0f0f0';
+      context.fillStyle = '#eeeeee';
       context.fillRect( 0, 0, canvas.width, canvas.height );
 
       //
@@ -131,11 +132,11 @@
       // Recorder
       
       let color = 0;
-      let colors = [ '⚫️', '🔵', '🔴', '🟣' ];
+      let colors = [ '⚫️', '🔵', '🔴', '🟣', '⚪️' ];
       
       function onColorClick() {
 
-        color = ( color + 1 ) % 4;
+        color = ( color + 1 ) % colors.length;
         colorButton.textContent = colors[ color ];
         
         recorder.color( color );
