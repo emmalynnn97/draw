@@ -15,10 +15,7 @@ function findSpot( ws ) {
     if ( room[ i ] === undefined ) {
       
       room[ i ] = ws;
-      console.log( i );
-      ws._id = i; // Uhmm
-      console.log( ws._id );
-      return;
+      return i;
       
     }
     
@@ -28,7 +25,7 @@ function findSpot( ws ) {
 
 function emptySpot( ws ) {
   
-  var index = room.indefOf( ws );
+  var index = room.indexOf( ws );
   
   if ( index !== -1 ) {
     
@@ -40,43 +37,30 @@ function emptySpot( ws ) {
 
 app.ws( '/', function ( ws, request ) {
   
-  //console.log( 'request', ws );
-  
-  ws.on( 'connection', function () {
-
-    console.log( 'connection', ws );
-    findSpot( ws );
-  
-  } );
-  
-  ws.onopen = function () {
-    
-    console.log( 'open' );
-    
-  };
-  
-  ws.on( 'open', function () {
-
-    console.log( 'open', ws );
-    findSpot( ws );
-  
-  } );
+  ws._id = findSpot( ws );
   
   ws.on( 'close', function () {
 
-    emptySpot( 'close', ws );
+    emptySpot( ws );
   
   } );
   
   ws.on( 'message', function ( data ) {
     
+    console.log( data );
+    
+    let array = new ArrayBuffer( data );
+    let view = new DataView( array );
+    
+    console.log( view );
+    
+    view.setUint8( 1, ws._id );
+    
     aWss.clients.forEach( function ( client ) {
-      
-      console.log( ws._id );
       
       if ( client !== ws ) {
 
-        client.send( data );
+        client.send( view.buffer );
 
       }
 
@@ -87,5 +71,7 @@ app.ws( '/', function ( ws, request ) {
 } );
 
 const listener = app.listen( process.env.PORT, function () {
+
   console.log( "Listening on port " + listener.address().port );
+
 } );
