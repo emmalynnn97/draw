@@ -2,6 +2,8 @@
 
 Seeing that the only solution to fight COVID-19 is to stay home, I thought it would be a good idea to bring this project back and help people stay connected somehow.
 
+[https://multiuser-sketchpad.glitch.me/](https://multiuser-sketchpad.glitch.me/)
+
 #### Dev notes
 
 This is a rework of a websockets experiment I did back in 2010:
