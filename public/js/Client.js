@@ -26,7 +26,6 @@ function Client( context, dom ) {
   let cx = null;
   let cy = null;
   let ccolor = null;
-  let isPointerDown = false;
   let isNewLine = false;
   
   function draw( x1, y1, x2, y2 ) {
@@ -112,11 +111,7 @@ function Client( context, dom ) {
     },
     move: function ( x, y ) {
 
-      if ( isPointerDown ) {
-
-        draw( cx, cy, x, y );
-
-      }
+      draw( cx, cy, x, y );
 
       cx = x;
       cy = y;
@@ -132,7 +127,6 @@ function Client( context, dom ) {
 
       c.style.display = '';
 
-      isPointerDown = true;
       cx = x;
       cy = y;
       ccolor = color;
@@ -142,7 +136,6 @@ function Client( context, dom ) {
 
       c.style.display = 'none';
 
-      isPointerDown = false;
       isNewLine = true;
 
     },
