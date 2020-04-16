@@ -131,6 +131,12 @@ function Client( context, dom ) {
       cy = y;
       ccolor = color;
 
+      //
+      
+      c.style.left = ( ( x / dpr ) - 8 ) + 'px';
+      c.style.top = ( ( y / dpr ) - 8 ) + 'px';
+      c.style.display = '';
+
     },
     up: function () {
 
