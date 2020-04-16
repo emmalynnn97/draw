@@ -103,7 +103,25 @@ function Client( context, dom ) {
               cy + data.getInt8( 3 )
             );            
           }
-          break;  
+          break;
+
+        case 4: // POINTER_DOWN_REL_X
+          if ( cx !== null ) {
+            this.move(
+              cx + data.getInt8( 2 ),
+              cy
+            );            
+          }
+          break;
+
+        case 5: // POINTER_DOWN_REL_Y
+          if ( cx !== null ) {
+            this.move(
+              cx,
+              cy + data.getInt8( 2 )
+            );            
+          }
+          break;
         
         case 6: // USER_DISCONNECT
           this.disconnect();

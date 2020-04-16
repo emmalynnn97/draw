@@ -16,7 +16,11 @@ function Recorder( context ) {
     // 2: POINTER_MOVE_ABS: USER_ID(UINT8), EVENT_ID(UINT8), X(UINT16), Y(UINT16)
     new DataView( new ArrayBuffer( 1 + 1 + 2 + 2 ) ),
     // 3: POINTER_MOVE_REL: USER_ID(UINT8), EVENT_ID(UINT8), DX(INT8), DY(INT8)
-    new DataView( new ArrayBuffer( 1 + 1 + 1 + 1 ) )
+    new DataView( new ArrayBuffer( 1 + 1 + 1 + 1 ) ),
+    // 4: POINTER_MOVE_REL_X: USER_ID(UINT8), EVENT_ID(UINT8), DX(INT8)
+    new DataView( new ArrayBuffer( 1 + 1 + 1 ) ),
+    // 5: POINTER_MOVE_REL_Y: USER_ID(UINT8), EVENT_ID(UINT8), DY(INT8)
+    new DataView( new ArrayBuffer( 1 + 1 + 1 ) )
   ];
 
   let cx = 0;
@@ -77,6 +81,30 @@ function Recorder( context ) {
         // context.fillRect( x - 2, y - 2, 4, 4 );
 
       } else {
+        
+        if ( dx === 0 ) {
+
+        command = commands[ 3 ];
+        command.setUint8( 1, 3 );
+        command.setInt8( 2, dx );
+        command.setInt8( 3, dy );
+          
+          
+        } else if ( dy === 0 ) {
+
+          command = commands[ 3 ];
+          command.setUint8( 1, 3 );
+          command.setInt8( 2, dx );
+          command.setInt8( 3, dy );
+
+        } else {
+
+          command = commands[ 3 ];
+          command.setUint8( 1, 3 );
+          command.setInt8( 2, dx );
+          command.setInt8( 3, dy );
+          
+        }
 
         command = commands[ 3 ];
         command.setUint8( 1, 3 );
