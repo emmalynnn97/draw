@@ -53,6 +53,7 @@ function Recorder( context ) {
       
       let command = commands[ 1 ];
       command.setUint8( 1, 1 );
+
       return command.buffer;
 
     },
@@ -60,10 +61,10 @@ function Recorder( context ) {
 
       client.move( x, y );
       
-      let command;
-
       let dx = x - cx;
       let dy = y - cy;
+
+      let command;
 
       if ( isNotInt8( dx ) || isNotInt8( dy ) ) {
 
