@@ -4,6 +4,8 @@
 
 import { Client } from './Client.js';
 
+const DEBUG = window.location.search === '?debug';
+
 function Recorder( context ) {
   
   const client = new Client( context );
@@ -13,9 +15,9 @@ function Recorder( context ) {
     new DataView( new ArrayBuffer( 1 + 1 + 2 + 2 + 1 ) ),
     // 1: POINTER_UP: USER_ID(UINT8), EVENT_ID(UINT8)
     new DataView( new ArrayBuffer( 1 + 1 ) ),
-    // 1: POINTER_MOVE_ABS: USER_ID(UINT8), EVENT_ID(UINT8), X(UINT16), Y(UINT16)
+    // 2: POINTER_MOVE_ABS: USER_ID(UINT8), EVENT_ID(UINT8), X(UINT16), Y(UINT16)
     new DataView( new ArrayBuffer( 1 + 1 + 2 + 2 ) ),
-    // 1: POINTER_MOVE_REL: USER_ID(UINT8), EVENT_ID(UINT8), DX(INT8), DY(INT8)
+    // 3: POINTER_MOVE_REL: USER_ID(UINT8), EVENT_ID(UINT8), DX(INT8), DY(INT8)
     new DataView( new ArrayBuffer( 1 + 1 + 1 + 1 ) )
   ];
 
@@ -46,9 +48,11 @@ function Recorder( context ) {
         command.setUint8( 1, 2 );
         command.setUint16( 2, x );
         command.setUint16( 4, y ); 
-        // debug
-        // context.fillStyle = 'blue';
-        // context.fillRect( x - 2, y - 2, 4, 4 );
+
+        if ( DEBUG ) {
+          context.fillStyle = 'blue';
+          context.fillRect( x - 2, y - 2, 4, 4 );
+        }
 
       } else {
 
@@ -56,9 +60,11 @@ function Recorder( context ) {
         command.setUint8( 1, 3 );
         command.setInt8( 2, dx );
         command.setInt8( 3, dy );
-        // debug
-        // context.fillStyle = 'red';
-        // context.fillRect( x - 2, y - 2, 4, 4 );
+        
+        if ( DEBUG ) {
+          context.fillStyle = 'red';
+          context.fillRect( x - 2, y - 2, 4, 4 );          
+        }
 
       }
 

@@ -2,6 +2,8 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
+const DEBUG = window.location.search === '?debug';
+
 function Client( context, dom ) {
   
   let dpr = window.devicePixelRatio;
@@ -125,8 +127,6 @@ function Client( context, dom ) {
     },
     down: function ( x, y, color ) {
 
-      c.style.display = '';
-
       cx = x;
       cy = y;
       ccolor = color;
@@ -139,18 +139,18 @@ function Client( context, dom ) {
 
     },
     up: function () {
+      
+      isNewLine = true;
 
       c.style.display = 'none';
-
-      isNewLine = true;
 
     },
     disconnect: function () {
 
-      c.style.display = 'none';
-
       cx = null;
       cy = null;
+      
+      c.style.display = 'none';
       
     }
     
