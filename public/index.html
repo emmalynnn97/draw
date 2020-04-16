@@ -56,30 +56,32 @@
        * 
        * Seeing that the only solution to fight COVID-19 is to stay
        * home, I thought it would be a good idea to bring this project
-       * back and help stay connected somehow.
+       * back and help people stay connected somehow.
        *
        * Dev notes:
        *
        * This is a rework of a websockets experiment I did back in 2010:
        * https://experiments.withgoogle.com/multiuser-sketchpad
        *
-       * Back then browsers didn't yet support binary websockets so it
+       * Back then browsers didn't support binary websockets yet so it
        * turned out to be a bit expensive to maintain and I had to shut
        * it down.
        *
        * 10 years later, most browsers support binary websockets and
        * pointer events so making this was fairly straighforward.
        *
-       * The part that took time was defining the data packets which
-       * ended up being a bit like a video codec. Most of the events
-       * are delta positions so it amounts 4 bytes per packet.
+       * The part that took time was defining the data packets (which
+       * ended up being a bit like a video codec). Most of the events
+       * being sent are delta positions so the average packet size is
+       * 4 bytes.
        *
-       * Seems like most of the people are interested in the server.js
-       * file, but imho the interesting one is Recorder.js and Client.js
+       * Seems like people are mostly interested in the server.js file
+       * but imho the interesting ones are Recorder.js and Client.js.
        *
-       * Hope people can use the con to see more realtime multiuser webapps.
+       * Hope to see people remixing this and so we can start seeing
+       * more multiuser realtime sites!
        *
-       * Stay safe!
+       * Stay safe.
        * - Mr.doob
        */
       
