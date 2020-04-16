@@ -22,7 +22,7 @@
        * https://glitch.com/edit/#!/multiuser-sketchpad
        */
       
-      import { Client } from './js/Client.js';
+      import { Painter } from './js/Painter.js';
       import { Recorder } from './js/Recorder.js';
       
       // const DEBUG = window.location.search === '?debug';
@@ -46,7 +46,7 @@
 
       //
       
-      let clients = {};
+      let painters = {};
       let recorder = null;
       let isPointerDown = false;
       
@@ -86,14 +86,14 @@
         let dataview = new DataView( event.data );
         let id = dataview.getUint8( 0 );
       
-        if ( clients[ id ] === undefined ) {
+        if ( painters[ id ] === undefined ) {
           
           let container = document.getElementById( 'cursors' );
-          clients[ id ] = new Client( context, container );
+          painters[ id ] = new Painter( context, container );
           
         }
         
-        clients[ id ].execute( dataview );
+        painters[ id ].execute( dataview );
 
       } );
       

@@ -4,7 +4,7 @@
 
 // const DEBUG = window.location.search === '?debug';
 
-function Client( context, dom ) {
+function Painter( context, dom ) {
   
   let dpr = window.devicePixelRatio;
   
@@ -181,4 +181,4 @@ function Client( context, dom ) {
   
 }
 
-export { Client }
+export { Painter }

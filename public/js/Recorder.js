@@ -2,11 +2,11 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
-import { Client } from './Client.js';
+import { Painter } from './Painter.js';
 
 function Recorder( context ) {
   
-  const client = new Client( context );
+  const client = new Painter( context );
   
   const commands = [
     // 0: POINTER_DOWN: USER_ID(UINT8), EVENT_ID(UINT8), X(UINT16), Y(UINT16), COLOR_ID(UINT8)
