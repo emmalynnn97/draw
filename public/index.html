@@ -13,8 +13,12 @@
         STATUS &nbsp;<span id="status">🟡</span> 
       </span>
       <span class="submenu">
-        <a href="https://multiuser-sketchpad-colors.glitch.me/">PENCIL</a>&nbsp;
-        <span id="color">⚫️</span><!--<span>⚫️</span><span>⚪️</span>-->
+        <a href="https://multiuser-sketchpad-colors.glitch.me/">GRAY</a>&nbsp;
+        <span id="color">⚫️</span>
+        <span id="colors">
+          <span>⚫️</span>
+          <span>⚪️</span>
+        </span>
       </span>
     </div>
     <div id="cursors"></div>
@@ -31,8 +35,6 @@
       import { Recorder } from './js/Recorder.js';
       
       // const DEBUG = window.location.search === '?debug';
-
-      let colorButton = document.getElementById( 'color' );
       
       // Canvas
       
@@ -67,10 +69,21 @@
         canvas.addEventListener( 'pointermove', onPointerMove );
         canvas.addEventListener( 'pointerdown', onPointerDown );
         canvas.addEventListener( 'pointerup', onPointerUp );
-              
-        colorButton.addEventListener( 'click', onColorClick );
 
-        document.getElementById( 'status' ).textContent = '🟢';    
+        document.getElementById( 'status' ).textContent = '🟢';       
+              
+        // Colors
+
+        let colors = document.getElementById( 'colors' );
+
+        for ( let i = 0; i < colors.children.length; i ++ ) {
+
+          let child = colors.children[ i ];
+          child.addEventListener( 'click', function ( event ) {
+
+            recorder.color( i );
+
+          } ); 
 
       } );
 
@@ -109,21 +122,6 @@
         event.preventDefault();
               
       } );
-      
-      
-      // Menu
-      
-      let color = 0;
-      let colors = [ '⚫️', '⚪️' ];
-      
-      function onColorClick() {
-
-        color = ( color + 1 ) % colors.length;
-        colorButton.textContent = colors[ color ];
-        
-        recorder.color( color );
-
-      }
       
       // Recorder
       

@@ -43,7 +43,6 @@ a {
     user-select: none;
     pointer-events: auto;
   }
-    #color {
-      margin-left:2px;
-      cursor: pointer;
-    }
+  #colors span {
+    cursor: pointer;
+  }
