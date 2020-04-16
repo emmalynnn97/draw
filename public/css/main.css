@@ -30,6 +30,11 @@ body {
   background-color: #ffffff;
   user-select: none;
 }
-#color {
-  cursor: pointer;
-}
+  #status {
+    margin-left: 2px;
+    margin-right: 8px;
+  }
+  #color {
+    margin-left:2px;
+    cursor: pointer;
+  }
