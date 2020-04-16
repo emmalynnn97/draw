@@ -43,11 +43,17 @@ function emptySpot( ws ) {
 
 //
 
+var users = 0;
+
 app.ws( '/', function ( ws, request ) {
+  
+  console.log( 'USERS:', ++ users );
   
   ws._id = findSpot( ws );
   
   ws.on( 'close', function () {
+    
+    -- users;
     
     var data = Buffer.from( [  ws._id , 6 ] );
     
