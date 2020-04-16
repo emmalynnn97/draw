@@ -52,21 +52,6 @@ function Painter( context, dom ) {
           context.strokeStyle = 'rgba(0, 0, 0, ' + ( 0.7 - d )  + ')';
           break;
         case 1:
-          context.strokeStyle = 'rgba(255, 0, 0, ' + ( 0.7 - d )  + ')';
-          break;
-        case 2:
-          context.strokeStyle = 'rgba(255, 0, 255, ' + ( 0.7 - d )  + ')';
-          break;
-        case 3:
-          context.strokeStyle = 'rgba(0, 0, 255, ' + ( 0.7 - d )  + ')';
-          break;
-        case 4:
-          context.strokeStyle = 'rgba(0, 255, 0, ' + ( 0.7 - d )  + ')';
-          break;
-        case 5:
-          context.strokeStyle = 'rgba(255, 255, 0, ' + ( 0.7 - d )  + ')';
-          break;
-        case 6:
           context.strokeStyle = 'rgba(255, 255, 255, ' + ( 1 - d )  + ')';
           break;
       }      

@@ -9,8 +9,12 @@
   </head>
   <body>
     <div id="menu">
-      STATUS <span id="status">🟡</span>
-      COLOR <span id="color">⚫️</span>
+      <span class="submenu">
+        STATUS &nbsp;<span id="status">🟡</span> 
+      </span>
+      <span class="submenu">
+        <a href="https://multiuser-sketchpad-colors.glitch.me/">✏️</a> <span style="padding:0 8px">|</span> <span id="color">⚫️</span>
+      </span>
     </div>
     <div id="cursors"></div>
     <script type="module">
@@ -109,7 +113,7 @@
       // Menu
       
       let color = 0;
-      let colors = [ '⚫️', '🔴', '🟣', '🔵', '🟢', '🟡', '⚪️' ];
+      let colors = [ '⚫️', '⚪️' ];
       
       function onColorClick() {
 

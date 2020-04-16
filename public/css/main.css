@@ -3,10 +3,13 @@ html {
 }
 body {
   background: #ffffff;
-  font-size: 10px;
+  font-size: 12px;
   font-family: sans-serif;
   margin: 0;
   overflow: hidden;
+}
+a {
+  text-decoration: none;
 }
 #canvas {
   display: block;
@@ -21,20 +24,19 @@ body {
 }
 #menu {
   position: absolute;
-  left: calc(50% - 70px);
   bottom: 10px;
-  color: #777777;
-  padding: 6px 10px;
-  border-radius: 25px;
-  vertical-align: middle;
-  background-color: #ffffff;
-  user-select: none;
+  width: 100%;
+  text-align: center;
 }
-  #status {
-    margin-left: 2px;
-    margin-right: 8px;
+  span.submenu {
+    display: inline-block;
+    background-color: #ffffff;
+    color: #999999;
+    padding: 6px 12px;
+    border-radius: 25px;
+    user-select: none;
   }
-  #color {
-    margin-left:2px;
-    cursor: pointer;
-  }
+    #color {
+      margin-left:2px;
+      cursor: pointer;
+    }
