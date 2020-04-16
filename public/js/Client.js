@@ -96,7 +96,7 @@ function Client( context, dom ) {
           );
           break;
 
-        case 3: // POINTER_DOWN_REL
+        case 3: // POINTER_DOWN_DELTA
           if ( cx !== null ) {
             this.move(
               cx + data.getInt8( 2 ),
@@ -105,7 +105,7 @@ function Client( context, dom ) {
           }
           break;
 
-        case 4: // POINTER_DOWN_REL_X
+        case 4: // POINTER_DOWN_DELTA_X
           if ( cx !== null ) {
             this.move(
               cx + data.getInt8( 2 ),
@@ -114,7 +114,7 @@ function Client( context, dom ) {
           }
           break;
 
-        case 5: // POINTER_DOWN_REL_Y
+        case 5: // POINTER_DOWN_DELTA_Y
           if ( cx !== null ) {
             this.move(
               cx,
