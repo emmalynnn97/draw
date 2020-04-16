@@ -1,4 +1,4 @@
-## Multiuser Sketchpad 2020 (COVID-19 edition)
+## Multiuser Sketchpad (COVID-19 edition)
 
 Seeing that the only solution to fight COVID-19 is to stay home, I thought it would be a good idea to bring this project back and help people stay connected somehow.
 
