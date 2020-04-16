@@ -7,7 +7,7 @@ Seeing that the only solution to fight COVID-19 is to stay home, I thought it wo
 #### Dev notes
 
 This is a rework of a websockets experiment I did back in 2010:
-[https://experiments.withgoogle.com/multiuser-sketchpad](https://experiments.withgoogle.com/multiuser-sketchpad)
+[https://web.archive.org/web/20101103142857/http://mrdoob.com/blog/post/701](https://web.archive.org/web/20101103142857/http://mrdoob.com/blog/post/701)
 
 Back then browsers didn't support binary websockets yet so it turned out to be a bit expensive to maintain and I had to shut it down.
 
