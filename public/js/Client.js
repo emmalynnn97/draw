@@ -2,7 +2,7 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
-const DEBUG = window.location.search === '?debug';
+// const DEBUG = window.location.search === '?debug';
 
 function Client( context, dom ) {
   
@@ -141,9 +141,7 @@ function Client( context, dom ) {
       
       isNewLine = true;
 
-      if ( DEBUG === false ) {
-        c.style.display = 'none';
-      }
+      c.style.display = 'none';
 
     },
     disconnect: function () {
@@ -151,9 +149,7 @@ function Client( context, dom ) {
       cx = null;
       cy = null;
       
-      if ( DEBUG === false ) {
-        c.style.display = 'none';
-      }
+      c.style.display = 'none';
       
     }
     

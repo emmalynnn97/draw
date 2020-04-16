@@ -153,18 +153,18 @@
         
         event.preventDefault();
 
-        // Throttle to 30Hz
-
-        const throttle = ( 1 / 30 ) * 1000;
-        const time = event.timeStamp;
-
-        if ( time < ( ptime + throttle ) ) return;
-
-        ptime = time;
-
-        //
-        
         if ( isPointerDown ) {
+
+          // Throttle to 30Hz
+
+          const throttle = ( 1 / 30 ) * 1000;
+          const time = event.timeStamp;
+
+          if ( time < ( ptime + throttle ) ) return;
+
+          ptime = time;
+
+          //        
 
           const x = parseInt( event.pageX * window.devicePixelRatio );
           const y = parseInt( event.pageY * window.devicePixelRatio );

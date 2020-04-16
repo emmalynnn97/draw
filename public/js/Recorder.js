@@ -40,6 +40,10 @@ function Recorder( context ) {
       command.setUint16( 2, x );
       command.setUint16( 4, y );
       command.setUint8( 6, ccolor );
+
+      cx = x;
+      cy = y;
+      
       return command.buffer;
 
     },
