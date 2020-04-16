@@ -15,7 +15,7 @@ Back then browsers didn't support binary websockets yet so it turned out to be a
 
 The part that took time was defining the data packets (which ended up being a bit like a video codec). Most of the events being sent are delta positions so the average packet size is 4 bytes.
 
-Seems like people are mostly interested in the server.js file but imho the interesting ones are Recorder.js and Painter.js.
+Seems like people are mostly interested in the `server.js` file but imho the interesting ones are `Recorder.js` and `Painter.js`.
 
 Hope to see people remixing this so we can start seeing more multiuser realtime sites!
 

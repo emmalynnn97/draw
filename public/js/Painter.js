@@ -39,7 +39,7 @@ function Painter( context, dom ) {
     
     let dx = x2 - x1;
 		let dy = y2 - y1;
-		let d = Math.sqrt( dx * dx + dy * dy ) * 0.02;
+		let d = Math.sqrt( dx * dx + dy * dy ) * 0.015;
 
     if ( ccolor !== null ) {
 
