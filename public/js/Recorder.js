@@ -4,8 +4,6 @@
 
 import { Client } from './Client.js';
 
-const DEBUG = window.location.search === '?debug';
-
 function Recorder( context ) {
   
   const client = new Client( context );
@@ -32,53 +30,7 @@ function Recorder( context ) {
   }
 
   return {
-
-    move: function ( x, y ) {
-
-      client.move( x, y );
-      
-      let command;
-
-      let dx = x - cx;
-      let dy = y - cy;
-
-      if ( isNotInt8( dx ) || isNotInt8( dy ) ) {
-
-        command = commands[ 2 ];
-        command.setUint8( 1, 2 );
-        command.setUint16( 2, x );
-        command.setUint16( 4, y ); 
-
-        if ( DEBUG ) {
-          context.fillStyle = 'blue';
-          context.fillRect( x - 2, y - 2, 4, 4 );
-        }
-
-      } else {
-
-        command = commands[ 3 ];
-        command.setUint8( 1, 3 );
-        command.setInt8( 2, dx );
-        command.setInt8( 3, dy );
-        
-        if ( DEBUG ) {
-          context.fillStyle = 'red';
-          context.fillRect( x - 2, y - 2, 4, 4 );          
-        }
-
-      }
-
-      cx = x;
-      cy = y;
-      
-      return command.buffer;
-
-    },
-    color: function ( color ) {
-
-      ccolor = color;
-
-    },
+    
     down: function ( x, y ) {
 
       client.down( x, y, ccolor );
@@ -98,6 +50,48 @@ function Recorder( context ) {
       let command = commands[ 1 ];
       command.setUint8( 1, 1 );
       return command.buffer;
+
+    },
+    move: function ( x, y ) {
+
+      client.move( x, y );
+      
+      let command;
+
+      let dx = x - cx;
+      let dy = y - cy;
+
+      if ( isNotInt8( dx ) || isNotInt8( dy ) ) {
+
+        command = commands[ 2 ];
+        command.setUint8( 1, 2 );
+        command.setUint16( 2, x );
+        command.setUint16( 4, y ); 
+        // debug
+        // context.fillStyle = 'blue';
+        // context.fillRect( x - 2, y - 2, 4, 4 );
+
+      } else {
+
+        command = commands[ 3 ];
+        command.setUint8( 1, 3 );
+        command.setInt8( 2, dx );
+        command.setInt8( 3, dy );
+        // debug
+        // context.fillStyle = 'red';
+        // context.fillRect( x - 2, y - 2, 4, 4 );
+
+      }
+
+      cx = x;
+      cy = y;
+      
+      return command.buffer;
+
+    },
+    color: function ( color ) {
+
+      ccolor = color;
 
     }
 

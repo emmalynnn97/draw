@@ -122,7 +122,6 @@ function Client( context, dom ) {
       
       c.style.left = ( ( x / dpr ) - 8 ) + 'px';
       c.style.top = ( ( y / dpr ) - 8 ) + 'px';
-      c.style.display = '';
 
     },
     down: function ( x, y, color ) {
@@ -142,7 +141,9 @@ function Client( context, dom ) {
       
       isNewLine = true;
 
-      c.style.display = 'none';
+      if ( DEBUG === false ) {
+        c.style.display = 'none';
+      }
 
     },
     disconnect: function () {
@@ -150,7 +151,9 @@ function Client( context, dom ) {
       cx = null;
       cy = null;
       
-      c.style.display = 'none';
+      if ( DEBUG === false ) {
+        c.style.display = 'none';
+      }
       
     }
     
