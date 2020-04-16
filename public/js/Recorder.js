@@ -36,6 +36,7 @@ function Recorder( context ) {
       client.move( x, y );
       
       let command;
+
       let dx = x - cx;
       let dy = y - cy;
 

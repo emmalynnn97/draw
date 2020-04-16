@@ -142,6 +142,7 @@ function Client( context, dom ) {
     disconnect: function () {
 
       c.style.display = 'none';
+
       cx = null;
       cy = null;
       
