@@ -24,4 +24,5 @@ Stay safe.
 
 [Mr.doob](https://mrdoob.com/)
 
-PS: Let me know if you have suggestions or feature requests: [@mrdoob](https://twitter.com/mrdoob)
+PS: Let me know if you have suggestions or feature requests: [@mrdoob](https://twitter.com/mrdoob) 
+PS2: Please don't try to break it, use these skills to contribute society instead. Thanks!

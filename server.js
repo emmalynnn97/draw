@@ -10,7 +10,7 @@ const aWss = expressWs.getWss('/');
 
 app.use( express.static( 'public' ) );
 
-// TODO: Limit users somehow?
+// TODO: Disconnect inactive users
 
 var clients = [];
 var room = new Array( 255 );
