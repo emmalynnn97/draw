@@ -9,12 +9,8 @@ body {
   overflow: hidden;
 }
 a {
-  color: #999999;
   text-decoration: none;
 }
-  a:hover {
-    text-decoration: underline;
-  }
 #canvas {
   display: block;
   cursor: crosshair;
