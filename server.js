@@ -10,80 +10,61 @@ const aWss = expressWs.getWss('/');
 
 app.use( express.static( 'public' ) );
 
-// TODO: Limit users somehow
+// TODO: Limit users somehow?
 
-const room = new Array( 255 );
+var clients = [];
+var room = new Array( 255 );
 
-function findSpot( ws ) {
+function add( ws ) {
 
-  for ( var i = 0; i < 255; i ++ ) {
-    
+  clients.push( ws );
+
+  for ( var i = 0; i < room.length; i ++ ) {
     if ( room[ i ] === undefined ) {
-      
+      ws._id = i;
       room[ i ] = ws;
-      return i;
-      
+      return;
     }
-    
   }
-  
+
 }
 
-function emptySpot( ws ) {
-  
+function remove( ws ) {
+
+  var index = clients.indexOf( ws );
+  if ( index !== - 1 ) clients.splice( index, 1 );
+
   var index = room.indexOf( ws );
-  
-  if ( index !== -1 ) {
-    
-    room[ index ] = undefined;
-    
-  }
-  
+  if ( index !== -1 ) room[ index ] = undefined;
+
 }
 
-//
+function broadcast( ws, data ) {
 
-var users = 0;
+  for ( var i = 0; i < clients.length; i ++ ) {
+    var client = clients[ i ];
+    if ( client !== ws ) client.send( data );
+  }
+
+}
 
 app.ws( '/', function ( ws, request ) {
-  
-  console.log( 'USERS:', ++ users );
-  
-  ws._id = findSpot( ws );
-  
+
+  add( ws );
+
+  console.log( 'USERS:', clients.length );
+
   ws.on( 'close', function () {
-    
-    -- users;
-    
-    var data = Buffer.from( [  ws._id , 6 ] );
-    
-    aWss.clients.forEach( function ( client ) {
 
-      if ( client !== ws && client.readyState === client.OPEN ) {
-
-        client.send( data );
-
-      }
-
-    } );
-
-    emptySpot( ws );
+    remove( ws );
+    broadcast( ws, Buffer.from( [ ws._id , 6 ] ) );
   
   } );
   
   ws.on( 'message', function ( data ) {
     
     data.writeUInt8( ws._id , 0 );
-    
-    aWss.clients.forEach( function ( client ) {
-      
-      if ( client !== ws && client.readyState === client.OPEN ) {
-
-        client.send( data );
-
-      }
-
-    } );
+    broadcast( ws, data );
 
   } );
 
