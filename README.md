@@ -23,3 +23,5 @@ Hope to see people remixing this so we can start seeing more multiuser realtime 
 Stay safe.
 
 [Mr.doob](https://mrdoob.com/)
+
+PS: Let me know if you have suggestions or feature requests: [@mrdoob](https://twitter.com/mrdoob)
