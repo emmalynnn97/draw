@@ -35,7 +35,7 @@ function remove( ws ) {
   if ( index !== - 1 ) clients.splice( index, 1 );
 
   var index = room.indexOf( ws );
-  if ( index !== -1 ) room[ index ] = undefined;
+  if ( index !== - 1 ) room[ index ] = undefined;
 
 }
 
@@ -43,7 +43,7 @@ function broadcast( ws, data ) {
 
   for ( var i = 0; i < clients.length; i ++ ) {
     var client = clients[ i ];
-    if ( client !== ws ) client.send( data );
+    if ( client !== ws && client.readyState === client.OPEN ) client.send( data );
   }
 
 }
