@@ -123,8 +123,8 @@ function Painter( context, dom ) {
         case 6: // POINTER_DOWN_DELTA_4_4
           if ( cx !== null ) {
             this.move(
-              cx + ( data.getInt8( 2 ) >> 4 ),
-              cy + ( data.getInt8( 2 ) & 15 )
+              cx + ( data.getUint8( 2 ) >> 4 ) - 8,
+              cy + ( data.getUint8( 2 ) & 15 ) - 8
             );
           }
           break;

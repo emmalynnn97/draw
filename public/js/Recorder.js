@@ -4,7 +4,7 @@
 
 import { Painter } from './Painter.js';
 
-const DEBUG = window.location.search === '?debug';
+// const DEBUG = window.location.search === '?debug';
 
 function Recorder( context ) {
   
@@ -40,12 +40,6 @@ function Recorder( context ) {
   function isInt4( value ) {
     
     return value >= - 8 && value <= 7;
-    
-  }
-  
-  function isInt8( value ) {
-    
-    return value >= - 128 && value <= 127;
     
   }
 
@@ -99,11 +93,11 @@ function Recorder( context ) {
 
       } else {
         
-        if ( DEBUG && isInt4( dx ) && isInt4( dy ) ) {
+        if ( isInt4( dx ) && isInt4( dy ) ) {
 
           command = commands[ 6 ];
           command.setUint8( 1, 6 );
-          command.setInt8( 2, dx << 4 | dy );
+          command.setUint8( 2, ( dx + 8 ) << 4 | ( dy + 8 ) );
 
         } else if ( dx === 0 ) {
 
