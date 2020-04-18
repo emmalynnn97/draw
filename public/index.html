@@ -67,7 +67,7 @@
 
       ws.addEventListener( 'open', function ( event ) {
 
-        recorder = new Recorder( context );
+        recorder = new Recorder( context, ws );
 
         canvas.addEventListener( 'pointermove', onPointerMove );
         canvas.addEventListener( 'pointerdown', onPointerDown );

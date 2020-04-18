@@ -6,7 +6,7 @@ import { Painter } from './Painter.js';
 
 const DEBUG = window.location.search === '?debug';
 
-function Recorder( context ) {
+function Recorder( context, ws ) {
   
   const client = new Painter( context );
   
@@ -82,6 +82,10 @@ function Recorder( context ) {
       
       let dx = x - cx;
       let dy = y - cy;
+
+      // Disconnect people moving too fast
+      let md = dx * dx + dy * dy;
+      if ( md > 80000 ) ws.close();
 
       let command;
       
