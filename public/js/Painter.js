@@ -151,8 +151,9 @@ function Painter( context, dom ) {
           }
           break;
           
-        case 6: // POINTER_DOWN_DELTA_Y
+        case 6: // POINTER_DOWN_DELTA_4_4
           if ( cx !== null ) {
+            console.log( data.getInt8( 2 ), data.getInt8( 2 ) >> 4, data.getInt8( 2 ) & 15 );
             this.move(
               cx + data.getInt8( 2 ) >> 4,
               cy + data.getInt8( 2 ) & 15

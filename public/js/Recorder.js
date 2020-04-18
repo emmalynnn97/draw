@@ -92,7 +92,7 @@ function Recorder( context ) {
         command.setUint8( 1, 6 );
         command.setInt8( 2, dx << 4 | dy );
         
-        console.log(dx << 4 | dy)
+        console.log( dx << 4 | dy, dx, dy )
         
       } else if ( isNotInt8( dx ) || isNotInt8( dy ) ) {
 
