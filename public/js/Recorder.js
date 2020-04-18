@@ -86,15 +86,7 @@ function Recorder( context ) {
 
       let command;
       
-      if ( DEBUG && isInt4( dx ) && isInt4( dy ) ) {
-
-        command = commands[ 6 ];
-        command.setUint8( 1, 6 );
-        command.setInt8( 2, dx << 4 | dy );
-        
-        console.log( dx << 4 | dy, dx, dy )
-        
-      } else if ( isNotInt8( dx ) || isNotInt8( dy ) ) {
+      if ( isNotInt8( dx ) || isNotInt8( dy ) ) {
 
         command = commands[ 2 ];
         command.setUint8( 1, 2 );
@@ -107,7 +99,13 @@ function Recorder( context ) {
 
       } else {
         
-        if ( dx === 0 ) {
+        if ( DEBUG && isInt4( dx ) && isInt4( dy ) ) {
+
+          command = commands[ 6 ];
+          command.setUint8( 1, 6 );
+          command.setInt8( 2, dx << 4 | dy );
+
+        } else if ( dx === 0 ) {
 
           command = commands[ 5 ];
           command.setUint8( 1, 5 );
