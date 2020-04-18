@@ -99,6 +99,7 @@ function Painter( context, dom ) {
               cx + data.getInt8( 2 ),
               cy + data.getInt8( 3 )
             );
+            /*
             if ( DEBUG ) {
               let dx = data.getInt8( 2 );
               let dy = data.getInt8( 3 );
@@ -108,6 +109,7 @@ function Painter( context, dom ) {
                 console.log( '... d', dx, dy );              
               }
             }
+            */
           }
           break;
 
@@ -117,6 +119,7 @@ function Painter( context, dom ) {
               cx + data.getInt8( 2 ),
               cy
             );
+            /*
             if ( DEBUG ) {
               let dx = data.getInt8( 2 );
               if ( isInt4( dx ) ) {
@@ -125,6 +128,7 @@ function Painter( context, dom ) {
                 console.log( '... dx', dx );              
               }
             }
+            */
           }
           break;
 
@@ -134,6 +138,7 @@ function Painter( context, dom ) {
               cx,
               cy + data.getInt8( 2 )
             );
+            /*
             if ( DEBUG ) {
               let dx = data.getInt8( 2 );
               if ( isInt4( dx ) ) {
@@ -142,6 +147,7 @@ function Painter( context, dom ) {
                 console.log( '... dy', dx );              
               }
             }
+            */
           }
           break;
         

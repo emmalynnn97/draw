@@ -4,6 +4,8 @@
 
 import { Painter } from './Painter.js';
 
+const DEBUG = window.location.search === '?debug';
+
 function Recorder( context ) {
   
   const client = new Painter( context );
@@ -15,11 +17,13 @@ function Recorder( context ) {
     new DataView( new ArrayBuffer( 1 + 1 ) ),
     // 2: POINTER_MOVE_ABS: USER_ID(UINT8), EVENT_ID(UINT8), X(UINT16), Y(UINT16)
     new DataView( new ArrayBuffer( 1 + 1 + 2 + 2 ) ),
-    // 3: POINTER_MOVE_DELTA: USER_ID(UINT8), EVENT_ID(UINT8), DX(INT8), DY(INT8)
+    // 3: POINTER_MOVE_DELTA_8_8: USER_ID(UINT8), EVENT_ID(UINT8), DX(INT8), DY(INT8)
     new DataView( new ArrayBuffer( 1 + 1 + 1 + 1 ) ),
     // 4: POINTER_MOVE_DELTA_X: USER_ID(UINT8), EVENT_ID(UINT8), DX(INT8)
     new DataView( new ArrayBuffer( 1 + 1 + 1 ) ),
     // 5: POINTER_MOVE_DELTA_Y: USER_ID(UINT8), EVENT_ID(UINT8), DY(INT8)
+    new DataView( new ArrayBuffer( 1 + 1 + 1 ) ),
+    // 7: POINTER_MOVE_DELTA_4_4: USER_ID(UINT8), EVENT_ID(UINT8), DX(INT4), DY(INT4)
     new DataView( new ArrayBuffer( 1 + 1 + 1 ) )
   ];
 
@@ -33,7 +37,6 @@ function Recorder( context ) {
     
   }
   
-  /*
   function isInt4( value ) {
     
     return value >= - 8 && value <= 7;
@@ -45,7 +48,6 @@ function Recorder( context ) {
     return value >= - 128 && value <= 127;
     
   }
-  */
 
   return {
     
@@ -83,13 +85,21 @@ function Recorder( context ) {
       let dy = y - cy;
 
       let command;
+      
+      if ( DEBUG && isInt4( dx ) && isInt4( dy ) ) {
 
-      if ( isNotInt8( dx ) || isNotInt8( dy ) ) {
+        command = commands[ 3 ];
+        command.setUint8( 1, 3 );
+        command.setInt8( 2, dx );
+        command.setInt8( 3, dy );
+        
+      } else if ( isNotInt8( dx ) || isNotInt8( dy ) ) {
 
         command = commands[ 2 ];
         command.setUint8( 1, 2 );
         command.setUint16( 2, x );
-        command.setUint16( 4, y ); 
+        command.setUint16( 4, y );
+
         // debug
         // context.fillStyle = 'blue';
         // context.fillRect( x - 2, y - 2, 4, 4 );
