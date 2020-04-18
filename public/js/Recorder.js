@@ -32,6 +32,12 @@ function Recorder( context ) {
     return value > 127 || value < - 128;
     
   }
+  
+  function isInt4( value ) {
+    
+    return value > - 65 && value < 64;
+    
+  }
 
   return {
     
