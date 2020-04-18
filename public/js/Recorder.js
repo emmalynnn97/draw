@@ -24,7 +24,9 @@ function Recorder( context ) {
     // 5: POINTER_MOVE_DELTA_Y: USER_ID(UINT8), EVENT_ID(UINT8), DY(INT8)
     new DataView( new ArrayBuffer( 1 + 1 + 1 ) ),
     // 6: POINTER_MOVE_DELTA_4_4: USER_ID(UINT8), EVENT_ID(UINT8), DXDY(UINT8)
-    new DataView( new ArrayBuffer( 1 + 1 + 1 ) )
+    new DataView( new ArrayBuffer( 1 + 1 + 1 ) ),
+    // 7: POINTER_MOVE_REPEAT 
+    new DataView( new ArrayBuffer( 1 + 1 ) ),
   ];
 
   let cx = 0;
@@ -80,25 +82,6 @@ function Recorder( context ) {
       
       let dx = x - cx;
       let dy = y - cy;
-      
-      if ( DEBUG ) {
-        
-        // console.log( dx, dy, pdx, pdy );
-        
-        if ( dx === pdx && dy === pdy ) {
-          
-          console.log( '!!!' );
-          
-        } else {
-          
-          console.log( '...' );
-          
-        }
-        
-        pdx = dx;
-        pdy = dy;
-        
-      }
 
       let command;
       
