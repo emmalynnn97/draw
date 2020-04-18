@@ -23,7 +23,7 @@ function Recorder( context ) {
     new DataView( new ArrayBuffer( 1 + 1 + 1 ) ),
     // 5: POINTER_MOVE_DELTA_Y: USER_ID(UINT8), EVENT_ID(UINT8), DY(INT8)
     new DataView( new ArrayBuffer( 1 + 1 + 1 ) ),
-    // 7: POINTER_MOVE_DELTA_4_4: USER_ID(UINT8), EVENT_ID(UINT8), DX(INT4), DY(INT4)
+    // 6: POINTER_MOVE_DELTA_4_4: USER_ID(UINT8), EVENT_ID(UINT8), DXDY(INT8)
     new DataView( new ArrayBuffer( 1 + 1 + 1 ) )
   ];
 
@@ -88,10 +88,11 @@ function Recorder( context ) {
       
       if ( DEBUG && isInt4( dx ) && isInt4( dy ) ) {
 
-        command = commands[ 3 ];
-        command.setUint8( 1, 3 );
-        command.setInt8( 2, dx );
-        command.setInt8( 3, dy );
+        command = commands[ 6 ];
+        command.setUint8( 1, 6 );
+        command.setInt8( 2, dx << 4 | dy );
+        
+        console.log(dx << 4 | dy)
         
       } else if ( isNotInt8( dx ) || isNotInt8( dy ) ) {
 

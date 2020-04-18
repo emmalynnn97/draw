@@ -150,8 +150,27 @@ function Painter( context, dom ) {
             */
           }
           break;
+          
+        case 6: // POINTER_DOWN_DELTA_Y
+          if ( cx !== null ) {
+            this.move(
+              cx + data.getInt8( 2 ) >> 4,
+              cy + data.getInt8( 2 ) & 15
+            );
+            /*
+            if ( DEBUG ) {
+              let dx = data.getInt8( 2 );
+              if ( isInt4( dx ) ) {
+                console.log( '!!! dy', dx );
+              } else {
+                console.log( '... dy', dx );              
+              }
+            }
+            */
+          }
+          break;
         
-        case 6: // USER_DISCONNECT
+        case 8: // USER_DISCONNECT
           this.disconnect();
           break;
       }

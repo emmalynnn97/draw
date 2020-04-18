@@ -57,7 +57,7 @@ app.ws( '/', function ( ws, request ) {
   ws.on( 'close', function () {
 
     remove( ws );
-    broadcast( ws, Buffer.from( [ ws._id , 6 ] ) );
+    broadcast( ws, Buffer.from( [ ws._id , 8 ] ) );
   
   } );
   
