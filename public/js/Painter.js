@@ -61,12 +61,6 @@ function Painter( context, dom ) {
     }
 
   }
-  
-  function isInt4( value ) {
-    
-    return value > - 8 && value < 7;
-    
-  }
 
   return {
 
