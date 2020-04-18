@@ -4,7 +4,7 @@
 
 import { Painter } from './Painter.js';
 
-// const DEBUG = window.location.search === '?debug';
+const DEBUG = window.location.search === '?debug';
 
 function Recorder( context ) {
   
@@ -30,6 +30,9 @@ function Recorder( context ) {
   let cx = 0;
   let cy = 0;
   let ccolor = 0;
+  
+  let pdx = 0;
+  let pdy = 0;
   
   function isNotInt8( value ) {
     
@@ -77,6 +80,25 @@ function Recorder( context ) {
       
       let dx = x - cx;
       let dy = y - cy;
+      
+      if ( DEBUG ) {
+        
+        // console.log( dx, dy, pdx, pdy );
+        
+        if ( dx === pdx && dy === pdy ) {
+          
+          console.log( '!!!' );
+          
+        } else {
+          
+          console.log( '...' );
+          
+        }
+        
+        pdx = dx;
+        pdy = dy;
+        
+      }
 
       let command;
       
