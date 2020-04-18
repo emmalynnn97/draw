@@ -2,7 +2,7 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
-// const DEBUG = window.location.search === '?debug';
+const DEBUG = window.location.search === '?debug';
 
 function Painter( context, dom ) {
   
@@ -61,6 +61,12 @@ function Painter( context, dom ) {
     }
 
   }
+  
+  function isInt4( value ) {
+    
+    return value > - 8 && value < 7;
+    
+  }
 
   return {
 
@@ -93,6 +99,15 @@ function Painter( context, dom ) {
               cx + data.getInt8( 2 ),
               cy + data.getInt8( 3 )
             );
+            if ( DEBUG ) {
+              let dx = data.getInt8( 2 );
+              let dy = data.getInt8( 3 );
+              if ( isInt4( dx ) && isInt4( dy ) ) {
+                console.log( '!!! d', dx, dy );
+              } else {
+                console.log( '... d', dx, dy );              
+              }
+            }
           }
           break;
 
@@ -102,6 +117,14 @@ function Painter( context, dom ) {
               cx + data.getInt8( 2 ),
               cy
             );
+            if ( DEBUG ) {
+              let dx = data.getInt8( 2 );
+              if ( isInt4( dx ) ) {
+                console.log( '!!! dx', dx );
+              } else {
+                console.log( '... dx', dx );              
+              }
+            }
           }
           break;
 
@@ -111,6 +134,14 @@ function Painter( context, dom ) {
               cx,
               cy + data.getInt8( 2 )
             );
+            if ( DEBUG ) {
+              let dx = data.getInt8( 2 );
+              if ( isInt4( dx ) ) {
+                console.log( '!!! dy', dx );
+              } else {
+                console.log( '... dy', dx );              
+              }
+            }
           }
           break;
         
