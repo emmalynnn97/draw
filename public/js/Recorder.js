@@ -23,7 +23,7 @@ function Recorder( context ) {
     new DataView( new ArrayBuffer( 1 + 1 + 1 ) ),
     // 5: POINTER_MOVE_DELTA_Y: USER_ID(UINT8), EVENT_ID(UINT8), DY(INT8)
     new DataView( new ArrayBuffer( 1 + 1 + 1 ) ),
-    // 6: POINTER_MOVE_DELTA_4_4: USER_ID(UINT8), EVENT_ID(UINT8), DXDY(INT8)
+    // 6: POINTER_MOVE_DELTA_4_4: USER_ID(UINT8), EVENT_ID(UINT8), DXDY(UINT8)
     new DataView( new ArrayBuffer( 1 + 1 + 1 ) )
   ];
 
