@@ -63,7 +63,7 @@ function Recorder( context, ws ) {
       cx = x;
       cy = y;
       
-      return command.buffer;
+      ws.send( command.buffer );
 
     },
     up: function () {
@@ -73,7 +73,7 @@ function Recorder( context, ws ) {
       let command = commands[ 1 ];
       command.setUint8( 1, 1 );
 
-      return command.buffer;
+      ws.send( command.buffer );
 
     },
     move: function ( x, y ) {
@@ -138,7 +138,7 @@ function Recorder( context, ws ) {
       cx = x;
       cy = y;
       
-      return command.buffer;
+      ws.send( command.buffer );
 
     },
     color: function ( color ) {

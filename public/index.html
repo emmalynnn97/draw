@@ -23,9 +23,6 @@
         </span>&nbsp;
         <a href="https://multiuser-sketchpad-colors.glitch.me/">➕</a>
       </span>
-      <span class="submenu">
-        <span id="info">ℹ️</span>
-      </span>
     </div>
     <div id="cursors"></div>
     <script type="module">
@@ -155,7 +152,7 @@
           const x = parseInt( event.pageX * window.devicePixelRatio );
           const y = parseInt( event.pageY * window.devicePixelRatio );
 
-          ws.send( recorder.move( x, y ) );
+          recorder.move( x, y );
 
         }
 
@@ -168,7 +165,7 @@
         const x = parseInt( event.pageX * window.devicePixelRatio );
         const y = parseInt( event.pageY * window.devicePixelRatio );
 
-        ws.send( recorder.down( x, y ) );
+        recorder.down( x, y );
         
       }
       
@@ -176,7 +173,7 @@
         
         isPointerDown = false;
         
-        ws.send( recorder.up() );
+        recorder.up();
         
       }
       
