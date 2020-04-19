@@ -87,8 +87,8 @@ function Recorder( context, ws ) {
 
       if ( md > 80000 ) {
 
-        alert( 'Disconnected. Try drawing slower.' );
         ws.close();
+        alert( 'Please, draw slowly.' );
 
       }
 
