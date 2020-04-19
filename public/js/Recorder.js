@@ -83,9 +83,14 @@ function Recorder( context, ws ) {
       let dx = x - cx;
       let dy = y - cy;
 
-      // Disconnect people moving too fast
       let md = dx * dx + dy * dy;
-      if ( md > 80000 ) ws.close();
+
+      if ( md > 80000 ) {
+
+        alert( 'Disconnected. Try drawing slower.' );
+        ws.close();
+
+      }
 
       let command;
       
