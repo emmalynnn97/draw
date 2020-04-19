@@ -39,6 +39,11 @@ a {
     user-select: none;
     pointer-events: auto;
   }
+    span.submenu.info {
+      position: absolute;
+      right: 15px;
+      background: transparent;
+    }
   #colors span {
     cursor: pointer;
   }
