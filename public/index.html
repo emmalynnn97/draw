@@ -12,6 +12,7 @@
     <link type="text/css" rel="stylesheet" href="./css/main.css">
   </head>
   <body>
+    <canvas id="canvas"></canvas>
     <div id="menu">
       <span class="submenu">
         <span id="status">🟡</span>&nbsp; SOCKET
@@ -44,18 +45,29 @@
       
       const scale = 2;
       
-      const canvas = document.createElement( 'canvas' );
-      canvas.id = 'canvas';
+      const canvas = document.getElementById( 'canvas' );
       canvas.width = window.innerWidth * window.devicePixelRatio * scale;
       canvas.height = window.innerHeight * window.devicePixelRatio * scale;
+      canvas.style.position = 'absolute';
       canvas.style.width = ( window.innerWidth * scale ) + 'px';
       canvas.style.height = ( window.innerHeight * scale ) + 'px';
-      document.body.appendChild( canvas );
       
       const context = canvas.getContext( '2d' );
       context.lineWidth = 0.7 * window.devicePixelRatio;
       context.fillStyle = '#eeeeee';
       context.fillRect( 0, 0, canvas.width, canvas.height );
+      
+      let position = { x: 0, y: 0 };
+      
+      canvas.addEventListener( 'wheel', function ( event ) {
+        
+        position.x -= event.deltaX;
+        position.y -= event.deltaY;
+        
+        canvas.style.left = position.x + 'px';
+        canvas.style.top = position.y + 'px';
+        
+      } );
 
       //
       
