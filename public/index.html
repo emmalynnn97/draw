@@ -42,12 +42,14 @@
       
       // Canvas
       
+      const scale = 2;
+      
       const canvas = document.createElement( 'canvas' );
       canvas.id = 'canvas';
-      canvas.width = window.innerWidth * window.devicePixelRatio;
-      canvas.height = window.innerHeight * window.devicePixelRatio;
-      canvas.style.width = window.innerWidth + 'px';
-      canvas.style.height = window.innerHeight + 'px';
+      canvas.width = window.innerWidth * window.devicePixelRatio * scale;
+      canvas.height = window.innerHeight * window.devicePixelRatio * scale;
+      canvas.style.width = ( window.innerWidth * scale ) + 'px';
+      canvas.style.height = ( window.innerHeight * scale ) + 'px';
       document.body.appendChild( canvas );
       
       const context = canvas.getContext( '2d' );
