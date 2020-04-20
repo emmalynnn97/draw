@@ -4,7 +4,7 @@
 
 import { Painter } from './Painter.js';
 
-const DEBUG = window.location.search === '?debug';
+// const DEBUG = window.location.search === '?debug';
 
 function Recorder( context, ws ) {
   

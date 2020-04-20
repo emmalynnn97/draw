@@ -2,7 +2,7 @@
  * @author mrdoob / http://mrdoob.com/
  */
 
-const DEBUG = window.location.search === '?debug';
+// const DEBUG = window.location.search === '?debug';
 
 function Painter( context, dom ) {
   
@@ -102,7 +102,6 @@ function Painter( context, dom ) {
               cx + data.getInt8( 2 ),
               cy
             );
-            // if ( DEBUG ) console.log( 'dx' );
           }
           break;
 
@@ -112,7 +111,6 @@ function Painter( context, dom ) {
               cx,
               cy + data.getInt8( 2 )
             );
-            // if ( DEBUG ) console.log( 'dy' );
           }
           break;
           
@@ -122,7 +120,6 @@ function Painter( context, dom ) {
               cx + ( data.getUint8( 2 ) >> 4 ) - 8,
               cy + ( data.getUint8( 2 ) & 15 ) - 8
             );
-            // if ( DEBUG ) console.log( '!!' );
           }
           break;
         
