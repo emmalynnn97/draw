@@ -14,7 +14,6 @@ a {
 #canvas {
   display: block;
   cursor: crosshair;
-  position: absolute;  
 }
 #cursors {
   position: absolute;
