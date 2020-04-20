@@ -26,7 +26,7 @@ function Recorder( context, ws ) {
     // 6: POINTER_MOVE_DELTA_4_4: USER_ID(UINT8), EVENT_ID(UINT8), DXDY(UINT8)
     new DataView( new ArrayBuffer( 1 + 1 + 1 ) ),
     // 7: POINTER_MOVE_REPEAT 
-    new DataView( new ArrayBuffer( 1 + 1 ) ),
+    new DataView( new ArrayBuffer( 1 + 1 ) )
   ];
 
   let cx = 0;
