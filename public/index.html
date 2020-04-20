@@ -12,6 +12,8 @@
     <link type="text/css" rel="stylesheet" href="./css/main.css">
   </head>
   <body>
+    <canvas id="canvas"></canvas>
+    <div id="cursors"></div>
     <div id="menu">
       <span class="submenu">
         <span id="status">🟡</span>&nbsp; SOCKET
@@ -25,7 +27,6 @@
       </span>
       <span class="submenu info"><a href="https://twitter.com/mrdoob" target="_blank">💬</a></span>
     </div>
-    <div id="cursors"></div>
     <script type="module">
       
       /**
@@ -42,15 +43,11 @@
       
       // Canvas
       
-      const scale = 2;
-      
-      const canvas = document.createElement( 'canvas' );
-      canvas.id = 'canvas';
-      canvas.width = window.innerWidth * window.devicePixelRatio * scale;
-      canvas.height = window.innerHeight * window.devicePixelRatio * scale;
-      canvas.style.width = ( window.innerWidth * scale ) + 'px';
-      canvas.style.height = ( window.innerHeight * scale ) + 'px';
-      document.body.appendChild( canvas );
+      const canvas = document.getElementById( 'canvas' );
+      canvas.width = window.innerWidth * window.devicePixelRatio;
+      canvas.height = window.innerHeight * window.devicePixelRatio;
+      canvas.style.width = ( window.innerWidth ) + 'px';
+      canvas.style.height = ( window.innerHeight ) + 'px';
       
       const context = canvas.getContext( '2d' );
       context.lineWidth = 0.7 * window.devicePixelRatio;
