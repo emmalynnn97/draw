@@ -13,6 +13,7 @@
   </head>
   <body>
     <canvas id="canvas"></canvas>
+    <div id="cursors"></div>
     <div id="menu">
       <span class="submenu">
         <span id="status">🟡</span>&nbsp; SOCKET
@@ -26,7 +27,6 @@
       </span>
       <span class="submenu info"><a href="https://twitter.com/mrdoob" target="_blank">💬</a></span>
     </div>
-    <div id="cursors"></div>
     <script type="module">
       
       /**
@@ -40,7 +40,7 @@
       import { Recorder } from './js/Recorder.js';
       
       // const DEBUG = window.location.search === '?debug';
-      
+            
       // Canvas
       
       const scale = 2;
@@ -48,7 +48,6 @@
       const canvas = document.getElementById( 'canvas' );
       canvas.width = window.innerWidth * window.devicePixelRatio * scale;
       canvas.height = window.innerHeight * window.devicePixelRatio * scale;
-      canvas.style.position = 'absolute';
       canvas.style.width = ( window.innerWidth * scale ) + 'px';
       canvas.style.height = ( window.innerHeight * scale ) + 'px';
       
@@ -57,15 +56,22 @@
       context.fillStyle = '#eeeeee';
       context.fillRect( 0, 0, canvas.width, canvas.height );
       
-      let position = { x: 0, y: 0 };
+      //
       
-      canvas.addEventListener( 'wheel', function ( event ) {
+      const cursors = document.getElementById( 'cursors' );
+      
+      let offset = { x: 0, y: 0 };
+      
+      document.addEventListener( 'wheel', function ( event ) {
         
-        position.x -= event.deltaX;
-        position.y -= event.deltaY;
+        offset.x -= event.deltaX;
+        offset.y -= event.deltaY;
         
-        canvas.style.left = position.x + 'px';
-        canvas.style.top = position.y + 'px';
+        canvas.style.left = offset.x + 'px';
+        canvas.style.top = offset.y + 'px';
+
+        cursors.style.left = offset.x + 'px';
+        cursors.style.top = offset.y + 'px';
         
       } );
 
@@ -126,8 +132,7 @@
       
         if ( painters[ id ] === undefined ) {
           
-          let container = document.getElementById( 'cursors' );
-          painters[ id ] = new Painter( context, container );
+          painters[ id ] = new Painter( context, cursors );
           
         }
         
@@ -164,8 +169,8 @@
 
           //        
 
-          const x = parseInt( event.pageX * window.devicePixelRatio );
-          const y = parseInt( event.pageY * window.devicePixelRatio );
+          const x = parseInt( ( event.pageX - offset.x ) * window.devicePixelRatio );
+          const y = parseInt( ( event.pageY - offset.y ) * window.devicePixelRatio );
 
           recorder.move( x, y );
 
@@ -177,8 +182,8 @@
         
         isPointerDown = true;
 
-        const x = parseInt( event.pageX * window.devicePixelRatio );
-        const y = parseInt( event.pageY * window.devicePixelRatio );
+        const x = parseInt( ( event.pageX - offset.x ) * window.devicePixelRatio );
+        const y = parseInt( ( event.pageY - offset.y ) * window.devicePixelRatio );
 
         recorder.down( x, y );
         
