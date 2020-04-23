@@ -159,7 +159,11 @@
 
       }
       
-      function onPointerDown( even ) {
+      function onPointerDown( event ) {
+        
+        if ( event.isPrimary === false ) {
+          
+        }
         
         isPointerDown = true;
 
