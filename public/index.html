@@ -59,7 +59,6 @@
       
       let painters = {};
       let recorder = null;
-      let isPointerDown = false;
       
       // WebSockets
             
@@ -70,7 +69,6 @@
 
         recorder = new Recorder( context, ws );
 
-        canvas.addEventListener( 'pointermove', onPointerMove );
         canvas.addEventListener( 'pointerdown', onPointerDown );
         canvas.addEventListener( 'pointerup', onPointerUp );
 
@@ -97,7 +95,6 @@
 
         recorder = null;
 
-        canvas.removeEventListener( 'pointermove', onPointerMove );
         canvas.removeEventListener( 'pointerdown', onPointerDown );
         canvas.removeEventListener( 'pointerup', onPointerUp );
         
@@ -136,9 +133,9 @@
       function onPointerMove( event ) {
         
         event.preventDefault();
-
-        if ( isPointerDown ) {
-
+        
+        if ( event.isPrimary ) {
+          
           // Throttle to 30Hz
 
           const throttle = ( 1 / 30 ) * 1000;
@@ -154,31 +151,35 @@
           const y = parseInt( event.pageY * window.devicePixelRatio );
 
           recorder.move( x, y );
-
+          
         }
 
       }
       
       function onPointerDown( event ) {
         
-        if ( event.isPrimary === false ) {
+        if ( event.isPrimary ) {
           
+          const x = parseInt( event.pageX * window.devicePixelRatio );
+          const y = parseInt( event.pageY * window.devicePixelRatio );
+
+          recorder.down( x, y );
+
+          canvas.addEventListener( 'pointermove', onPointerMove );
+
         }
-        
-        isPointerDown = true;
-
-        const x = parseInt( event.pageX * window.devicePixelRatio );
-        const y = parseInt( event.pageY * window.devicePixelRatio );
-
-        recorder.down( x, y );
         
       }
       
       function onPointerUp( event ) {
-        
-        isPointerDown = false;
-        
-        recorder.up();
+
+        if ( event.isPrimary ) {
+
+          recorder.up();
+
+          canvas.removeEventListener( 'pointermove', onPointerMove );
+          
+        }
         
       }
       
