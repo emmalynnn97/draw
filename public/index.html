@@ -91,6 +91,18 @@
           } ); 
           
         }
+        
+        // Download
+        
+        let download = document.getElementById( 'download' );
+        download.addEventListener( 'click', function ( event ) {
+          
+          var link = document.createElement( 'a' );
+          link.download = 'filename.png';
+          link.href = canvas.toDataURL();
+          link.click();
+          
+        } );
 
       } );
 
