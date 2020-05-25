@@ -98,7 +98,7 @@
         download.addEventListener( 'click', function ( event ) {
           
           var link = document.createElement( 'a' );
-          link.download = 'ms' +  new Date().toLocaleString() + '.png';
+          link.download = generateFilename();
           link.href = canvas.toDataURL();
           link.click();
           
@@ -200,17 +200,20 @@
       
       // Utils
       
-      function getDate() {
+      function generateFilename() {
 
         var dt = new Date();
 
-        return `
-          ${dt.getFullYear().toString().padStart(4, '0')}
-          ${(dt.getMonth()+1).toString().padStart(2, '0')}
-          ${dt.getDate().toString().padStart(2, '0')}
-          ${dt.getHours().toString().padStart(2, '0')}
-          ${dt.getMinutes().toString().padStart(2, '0')}
-          ${dt.getSeconds().toString().padStart(2, '0')}`;        
+        return [
+          'Multiuser Sketchpad ',
+          dt.getFullYear().toString().padStart( 4, '0' ) + '_',
+          (dt.getMonth()+1).toString().padStart( 2, '0' ) + '_',
+          dt.getDate().toString().padStart( 2, '0' ) + ' ',
+          dt.getHours().toString().padStart( 2, '0' ) + '_',
+          dt.getMinutes().toString().padStart( 2, '0' ) + '_',
+          dt.getSeconds().toString().padStart( 2, '0' ),
+          '.png'
+        ].join( '' );
         
       }
       
