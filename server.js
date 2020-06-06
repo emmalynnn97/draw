@@ -22,6 +22,7 @@ function add( ws ) {
   for ( var i = 0; i < room.length; i ++ ) {
     if ( room[ i ] === undefined ) {
       ws._id = i;
+      ws._time = Date.now();
       room[ i ] = ws;
       return;
     }
