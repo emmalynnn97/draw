@@ -12,14 +12,14 @@ app.use( express.static( 'public' ) );
 
 //
 
-var clients = [];
-var room = new Array( 255 );
+const clients = [];
+const room = new Array( 255 );
 
 function add( ws ) {
 
   clients.push( ws );
 
-  for ( var i = 0; i < room.length; i ++ ) {
+  for ( let i = 0; i < room.length; i ++ ) {
     if ( room[ i ] === undefined ) {
       ws._id = i;
       ws._time = Date.now();
@@ -42,7 +42,7 @@ function remove( ws ) {
 
 function broadcast( ws, data ) {
 
-  for ( var i = 0; i < clients.length; i ++ ) {
+  for ( let i = 0; i < clients.length; i ++ ) {
     var client = clients[ i ];
     if ( client !== ws && client.readyState === client.OPEN ) client.send( data );
   }
@@ -63,6 +63,10 @@ app.ws( '/', function ( ws, request ) {
   } );
   
   ws.on( 'message', function ( data ) {
+    
+    const time = Date.now();
+    if ( ws._time === time ) ws.close();
+    ws._time = time;
     
     data.writeUInt8( ws._id , 0 );
     broadcast( ws, data );
