@@ -22,7 +22,7 @@ function add( ws ) {
   for ( let i = 0; i < room.length; i ++ ) {
     if ( room[ i ] === undefined ) {
       ws._id = i;
-      ws._time = Date.now();
+      ws._strokes = 0;
       room[ i ] = ws;
       return;
     }
@@ -43,7 +43,7 @@ function remove( ws ) {
 function broadcast( ws, data ) {
 
   for ( let i = 0; i < clients.length; i ++ ) {
-    var client = clients[ i ];
+    const client = clients[ i ];
     if ( client !== ws && client.readyState === client.OPEN ) client.send( data );
   }
 
@@ -64,9 +64,7 @@ app.ws( '/', function ( ws, request ) {
   
   ws.on( 'message', function ( data ) {
     
-    const time = Date.now();
-    if ( ws._time === time ) ws.close();
-    ws._time = time;
+    ws._strokes ++;
     
     data.writeUInt8( ws._id , 0 );
     broadcast( ws, data );
@@ -74,6 +72,19 @@ app.ws( '/', function ( ws, request ) {
   } );
 
 } );
+
+setInterval( function () {
+
+	for ( let i = 0; i < clients.length; i ++ ) {
+		const client = clients[ i ];
+		if ( client._strokes > 100 ) {
+      client.close();
+      console.log( 'CLOSED:', client._id );
+    }
+		client._strokes = 0;
+	}
+
+}, 1000 );
 
 //
 
