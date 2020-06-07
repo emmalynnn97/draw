@@ -173,7 +173,9 @@
       
       function onPointerDown( event ) {
         
-        if ( event.isPrimary ) {
+        if ( event.isPrimary && event.button === 0 ) {
+          
+          console.log( event );
           
           const x = parseInt( event.pageX * window.devicePixelRatio );
           const y = parseInt( event.pageY * window.devicePixelRatio );
@@ -188,7 +190,7 @@
       
       function onPointerUp( event ) {
 
-        if ( event.isPrimary ) {
+        if ( event.isPrimary && event.button === 0 ) {
 
           recorder.up();
 
@@ -200,10 +202,10 @@
       
       setInterval( function () {
 
-        context.fillStyle = 'rgba(238, 238, 238, 0.04)';
+        context.fillStyle = 'rgba(238, 238, 238, 0.05)';
         context.fillRect( 0, 0, canvas.width, canvas.height );
 
-      }, 20000 );
+      }, 30000 );
       
       // Utils
       
