@@ -175,8 +175,6 @@
         
         if ( event.isPrimary && event.button === 0 ) {
           
-          console.log( event );
-          
           const x = parseInt( event.pageX * window.devicePixelRatio );
           const y = parseInt( event.pageY * window.devicePixelRatio );
 
@@ -201,6 +199,8 @@
       }
       
       setInterval( function () {
+        
+        if ( ws.readyState !== 1 ) return;
 
         context.fillStyle = 'rgba(238, 238, 238, 0.05)';
         context.fillRect( 0, 0, canvas.width, canvas.height );
