@@ -145,17 +145,17 @@ function Recorder( context, ws ) {
       if ( ws.readyState === WebSocket.OPEN ) {
       
         ws.send( command.buffer );
+
+        const md = dx * dx + dy * dy;
+
+        if ( md > 80000 ) {
+
+          ws.close();
+          client.up();
+          alert( 'Please, draw slowly.' );
+
+        }
         
-      }
-      
-      let md = dx * dx + dy * dy;
-
-      if ( md > 80000 ) {
-
-        ws.close();
-        client.up();
-        alert( 'Please, draw slowly.' );
-
       }
 
     },
