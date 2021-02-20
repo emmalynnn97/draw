@@ -91,16 +91,6 @@ function Recorder( context, ws ) {
       let dx = x - cx;
       let dy = y - cy;
 
-      let md = dx * dx + dy * dy;
-
-      if ( md > 80000 ) {
-
-        client.up();
-        ws.close();
-        alert( 'Please, draw slowly.' );
-
-      }
-
       let command;
       
       if ( isNotInt8( dx ) || isNotInt8( dy ) ) {
@@ -156,6 +146,16 @@ function Recorder( context, ws ) {
       
         ws.send( command.buffer );
         
+      }
+      
+      let md = dx * dx + dy * dy;
+
+      if ( md > 80000 ) {
+
+        ws.close();
+        client.up();
+        alert( 'Please, draw slowly.' );
+
       }
 
     },
