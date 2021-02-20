@@ -63,7 +63,11 @@ function Recorder( context, ws ) {
       cx = x;
       cy = y;
       
-      ws.send( command.buffer );
+      if ( ws.readyState === WebSocket.OPEN ) {
+
+        ws.send( command.buffer );
+
+      }
 
     },
     up: function () {
@@ -73,7 +77,11 @@ function Recorder( context, ws ) {
       let command = commands[ 1 ];
       command.setUint8( 1, 1 );
 
-      ws.send( command.buffer );
+      if ( ws.readyState === WebSocket.OPEN ) {
+
+        ws.send( command.buffer );
+        
+      }
 
     },
     move: function ( x, y ) {
@@ -87,6 +95,7 @@ function Recorder( context, ws ) {
 
       if ( md > 80000 ) {
 
+        client.up();
         ws.close();
         alert( 'Please, draw slowly.' );
 
@@ -142,8 +151,12 @@ function Recorder( context, ws ) {
 
       cx = x;
       cy = y;
+ 
+      if ( ws.readyState === WebSocket.OPEN ) {
       
-      ws.send( command.buffer );
+        ws.send( command.buffer );
+        
+      }
 
     },
     color: function ( color ) {
