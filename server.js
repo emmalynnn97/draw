@@ -23,6 +23,7 @@ function add( ws ) {
     if ( room[ i ] === undefined ) {
       ws._id = i;
       ws._strokes = 0;
+      ws._time = Date.now();
       room[ i ] = ws;
       return;
     }
@@ -65,6 +66,7 @@ app.ws( '/', function ( ws, request ) {
   ws.on( 'message', function ( data ) {
     
     ws._strokes ++;
+    ws._time = Date.now();
     
     data.writeUInt8( ws._id , 0 );
     broadcast( ws, data );
@@ -74,14 +76,20 @@ app.ws( '/', function ( ws, request ) {
 } );
 
 setInterval( function () {
+  
+  const idleTime = Date.now() - 600000;
 
 	for ( let i = 0; i < clients.length; i ++ ) {
 		const client = clients[ i ];
 		if ( client._strokes > 100 ) {
       client.close();
-      console.log( 'CLOSED:', client._id );
+      console.log( 'ABUSE:', client._id );
     }
-		client._strokes = 0;
+		if ( client._time < idleTime ) {
+      client.close();
+      console.log( 'IDLE:', client._id );
+    }
+    client._strokes = 0;
 	}
 
 }, 1000 );
