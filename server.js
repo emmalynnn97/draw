@@ -22,8 +22,8 @@ function add( ws ) {
   for ( let i = 0; i < room.length; i ++ ) {
     if ( room[ i ] === undefined ) {
       ws._id = i;
+      ws._idle = 0;
       ws._strokes = 0;
-      ws._time = Date.now();
       room[ i ] = ws;
       return;
     }
@@ -65,8 +65,8 @@ app.ws( '/', function ( ws, request ) {
   
   ws.on( 'message', function ( data ) {
     
+    ws._idle = 0;
     ws._strokes ++;
-    ws._time = Date.now();
     
     data.writeUInt8( ws._id , 0 );
     broadcast( ws, data );
@@ -85,7 +85,9 @@ setInterval( function () {
       client.close();
       console.log( 'ABUSE:', client._id );
     }
-		if ( client._time < idleTime ) {
+    if ( client._idle === 0 ) {
+      client._idle = Date.now();
+    } else if ( client._idle < idleTime ) {
       client.close();
       console.log( 'IDLE:', client._id );
     }
