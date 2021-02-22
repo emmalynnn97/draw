@@ -54,7 +54,7 @@ app.ws( '/', function ( ws, request ) {
 
   add( ws );
 
-  console.log( 'USERS:', clients.length );
+  console.log( '> USERS:', clients.length );
 
   ws.on( 'close', function () {
 
@@ -83,13 +83,13 @@ setInterval( function () {
 		const client = clients[ i ];
 		if ( client._strokes > 100 ) {
       client.close();
-      console.log( 'ABUSE:', client._id );
+      console.log( `< ABUSE: ${ client._id } (${ client._strokes })` );
     }
     if ( client._idle === 0 ) {
       client._idle = Date.now();
     } else if ( client._idle < idleTime ) {
       client.close();
-      console.log( 'IDLE:', client._id );
+      console.log( `< IDLE: ${ client._id }` );
     }
     client._strokes = 0;
 	}
