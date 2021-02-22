@@ -81,20 +81,20 @@ setInterval( function () {
 
 	for ( let i = 0; i < clients.length; i ++ ) {
 		const client = clients[ i ];
-		if ( client._strokes > 1000 ) {
-      client.close();
+		if ( client._strokes > 500 ) {
+      client.terminate();
       console.log( `< ABUSE: ${ client._id } (${ client._strokes })` );
     }
     if ( client._idle === 0 ) {
       client._idle = Date.now();
     } else if ( client._idle < idleTime ) {
-      client.close();
+      client.terminate();
       console.log( `< IDLE: ${ client._id }` );
     }
     client._strokes = 0;
 	}
 
-}, 10000 );
+}, 5000 );
 
 //
 
