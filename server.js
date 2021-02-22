@@ -22,7 +22,7 @@ function add( ws ) {
   for ( let i = 0; i < room.length; i ++ ) {
     if ( room[ i ] === undefined ) {
       ws._id = i;
-      ws._idle = 0;
+      ws._idle = Date.now();
       ws._strokes = 0;
       room[ i ] = ws;
       return;
@@ -81,7 +81,7 @@ setInterval( function () {
 
 	for ( let i = 0; i < clients.length; i ++ ) {
 		const client = clients[ i ];
-		if ( client._strokes > 100 ) {
+		if ( client._strokes > 150 ) {
       client.close();
       console.log( `< ABUSE: ${ client._id } (${ client._strokes })` );
     }
