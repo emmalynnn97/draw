@@ -150,9 +150,9 @@
         
         if ( event.isPrimary ) {
           
-          // Throttle to 30Hz
+          // Throttle to 20Hz
 
-          const throttle = ( 1 / 30 ) * 1000;
+          const throttle = ( 1 / 20 ) * 1000;
           const time = event.timeStamp;
 
           if ( time < ( ptime + throttle ) ) return;
