@@ -81,7 +81,7 @@ setInterval( function () {
 
 	for ( let i = 0; i < clients.length; i ++ ) {
 		const client = clients[ i ];
-		if ( client._strokes > 500 ) {
+		if ( client._strokes > 300 ) {
       client.terminate();
       console.log( `< ABUSE: ${ client._id } (${ client._strokes })` );
     }
