@@ -18,7 +18,7 @@ function Painter( context, dom ) {
   c.style.display = 'none';
 
   let ctx = c.getContext("2d");
-  ctx.lineWidth = 1;
+  ctx.lineWidth = 10;
   ctx.beginPath();
   ctx.arc( 8 * dpr, 8 * dpr, 7, 0, Math.PI * 2 );
   ctx.stroke();
