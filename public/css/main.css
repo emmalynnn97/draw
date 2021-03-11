@@ -11,9 +11,14 @@ body {
 a {
   text-decoration: none;
 }
+body{
+  cursor:url(https://api.iconify.design/noto-paintbrush.svg), auto !important;
+  
+}
 #canvas {
   display: block;
-  cursor: crosshair;
+  cursor: inherit;
+  
 }
 #cursors {
   position: absolute;
@@ -21,6 +26,7 @@ a {
   height: 100%;
   overflow: hidden;
   pointer-events: none;
+  cursor:url("../images/paintbrush.png") !important;
 }
 #menu {
   position: absolute;
